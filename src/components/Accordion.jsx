@@ -94,6 +94,7 @@ export const AccordionTrigger = React.forwardRef(
     </StyledHeader>
   )
 );
+AccordionTrigger.displayName = "AccordionTrigger";
 export const AccordionContent = React.forwardRef(
   ({ children, ...props }, forwardedRef) => (
     <StyledContent {...props} ref={forwardedRef}>
@@ -101,3 +102,4 @@ export const AccordionContent = React.forwardRef(
     </StyledContent>
   )
 );
+AccordionContent.displayName = "AccordionContent";
