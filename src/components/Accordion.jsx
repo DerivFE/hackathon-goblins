@@ -1,6 +1,6 @@
 import React from "react";
-import { styled, keyframes } from "../../stitches.config";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import { styled, keyframes } from "stitches.config";
 import PlusIcon from "../assets/svg/plus.svg";
 import MinusIcon from "../assets/svg/minus.svg";
 
