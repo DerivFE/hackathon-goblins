@@ -1,8 +1,8 @@
 import React from "react";
-import { styled, keyframes } from "../../stitches.config";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import PlusIcon from "../assets/svg/plus.svg";
-import MinusIcon from "../assets/svg/minus.svg";
+import { styled, keyframes } from "stitches.config";
+import PlusIcon from "assets/svg/plus.svg";
+import MinusIcon from "assets/svg/minus.svg";
 
 const slideDown = keyframes({
   from: { height: 0 },

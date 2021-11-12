@@ -1,12 +1,12 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import styles from "styles/Home.module.css";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "../src/components/Accordion";
+} from "components/Accordion";
 
 export default function Home() {
   return (
@@ -57,7 +57,7 @@ export default function Home() {
           </a>
         </div>
         <div style={{ maxWidth: "600px", width: "100%" }}>
-          <Accordion type="multiple" collapsible>
+          <Accordion type="multiple" collapsible="true">
             <AccordionItem value="item-1">
               <AccordionTrigger>Is it accessible?</AccordionTrigger>
               <AccordionContent>
