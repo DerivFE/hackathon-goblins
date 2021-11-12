@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "components/Accordion";
-import { Text, H1 } from "components/Text";
+import { Text } from "components/Text";
 import Layout from "components/layout/Layout";
 
 const Home = () => {
