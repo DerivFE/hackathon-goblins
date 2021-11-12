@@ -24,6 +24,12 @@ export const Box = styled("div", {
       end: {
         justifyContent: "flex-end",
       },
+      sb: {
+        justifyContent: "space-between",
+      },
+      sa: {
+        justifyContent: "space-around",
+      },
     },
     ai: {
       start: {
@@ -34,6 +40,12 @@ export const Box = styled("div", {
       },
       end: {
         alignItems: "flex-end",
+      },
+      sb: {
+        alignItems: "space-between",
+      },
+      sa: {
+        alignItems: "space-around",
       },
     },
   },

@@ -103,7 +103,7 @@ const Home = () => {
           <div style={{ marginBottom: "20px" }}>
             <Button variant="outlined">Button</Button>
           </div>
-          <Box jc="center" ai="center" style={{ marginBottom: "20px" }}>
+          <Box jc="sb" ai="center" style={{ marginBottom: "20px" }}>
             Row
             <Button>Button</Button>
             <Button>Button</Button>
