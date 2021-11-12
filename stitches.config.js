@@ -44,83 +44,83 @@ export const { styled, getCssText, CSS, keyframes } = createStitches({
       6: "48px",
       7: "80px",
     },
-    utils: {
-      p: (config) => (value) => ({
-        paddingTop: value,
-        paddingBottom: value,
-        paddingLeft: value,
-        paddingRight: value,
-      }),
-      pt: (config) => (value) => ({
-        paddingTop: value,
-      }),
-      pr: (config) => (value) => ({
-        paddingRight: value,
-      }),
-      pb: (config) => (value) => ({
-        paddingBottom: value,
-      }),
-      pl: (config) => (value) => ({
-        paddingLeft: value,
-      }),
-      px: (config) => (value) => ({
-        paddingLeft: value,
-        paddingRight: value,
-      }),
-      py: (config) => (value) => ({
-        paddingTop: value,
-        paddingBottom: value,
-      }),
+  },
+  utils: {
+    p: (config) => (value) => ({
+      paddingTop: value,
+      paddingBottom: value,
+      paddingLeft: value,
+      paddingRight: value,
+    }),
+    pt: (config) => (value) => ({
+      paddingTop: value,
+    }),
+    pr: (config) => (value) => ({
+      paddingRight: value,
+    }),
+    pb: (config) => (value) => ({
+      paddingBottom: value,
+    }),
+    pl: (config) => (value) => ({
+      paddingLeft: value,
+    }),
+    px: (config) => (value) => ({
+      paddingLeft: value,
+      paddingRight: value,
+    }),
+    py: (config) => (value) => ({
+      paddingTop: value,
+      paddingBottom: value,
+    }),
 
-      m: (config) => (value) => ({
-        marginTop: value,
-        marginBottom: value,
-        marginLeft: value,
-        marginRight: value,
-      }),
-      mt: (config) => (value) => ({
-        marginTop: value,
-      }),
-      mr: (config) => (value) => ({
-        marginRight: value,
-      }),
-      mb: (config) => (value) => ({
-        marginBottom: value,
-      }),
-      ml: (config) => (value) => ({
-        marginLeft: value,
-      }),
-      mx: (config) => (value) => ({
-        marginLeft: value,
-        marginRight: value,
-      }),
-      my: (config) => (value) => ({
-        marginTop: value,
-        marginBottom: value,
-      }),
+    m: (config) => (value) => ({
+      marginTop: value,
+      marginBottom: value,
+      marginLeft: value,
+      marginRight: value,
+    }),
+    mt: (config) => (value) => ({
+      marginTop: value,
+    }),
+    mr: (config) => (value) => ({
+      marginRight: value,
+    }),
+    mb: (config) => (value) => ({
+      marginBottom: value,
+    }),
+    ml: (config) => (value) => ({
+      marginLeft: value,
+    }),
+    mx: (config) => (value) => ({
+      marginLeft: value,
+      marginRight: value,
+    }),
+    my: (config) => (value) => ({
+      marginTop: value,
+      marginBottom: value,
+    }),
 
-      size: (config) => (value) => ({
-        width: value,
-        height: value,
-      }),
+    size: (config) => (value) => ({
+      width: value,
+      height: value,
+    }),
 
-      ta: (config) => (value) => ({ textAlign: value }),
-      lh: (config) => (value) => ({ lineHeight: value }),
+    ta: (config) => (value) => ({ textAlign: value }),
+    lh: (config) => (value) => ({ lineHeight: value }),
 
-      fd: (config) => (value) => ({ flexDirection: value }),
-      fw: (config) => (value) => ({ flexWrap: value }),
+    fd: (config) => (value) => ({ flexDirection: value }),
+    fw: (config) => (value) => ({ flexWrap: value }),
 
-      ai: (config) => (value) => ({ alignItems: value }),
-      ac: (config) => (value) => ({ alignContent: value }),
-      jc: (config) => (value) => ({ justifyContent: value }),
-      as: (config) => (value) => ({ alignSelf: value }),
-      fg: (config) => (value) => ({ flexGrow: value }),
-      fs: (config) => (value) => ({ flexShrink: value }),
-      fb: (config) => (value) => ({ flexBasis: value }),
+    ai: (config) => (value) => ({ alignItems: value }),
+    ac: (config) => (value) => ({ alignContent: value }),
+    jc: (config) => (value) => ({ justifyContent: value }),
+    as: (config) => (value) => ({ alignSelf: value }),
+    fg: (config) => (value) => ({ flexGrow: value }),
+    fs: (config) => (value) => ({ flexShrink: value }),
+    fb: (config) => (value) => ({ flexBasis: value }),
 
-      bc: (config) => (value) => ({
-        backgroundColor: value,
-      }),
-    },
+    bc: (config) => (value) => ({
+      backgroundColor: value,
+    }),
   },
 });

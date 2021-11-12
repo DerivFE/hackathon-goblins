@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from "components/Accordion";
 import { Text } from "components/Text";
+import { Button } from "components/Button";
 import Layout from "components/layout/Layout";
 
 const Home = () => {
@@ -92,6 +93,15 @@ const Home = () => {
             This is a responsive H3
           </Text>
           <Text>This is a default text component</Text>
+          <div style={{ margin: "20px 0" }}>
+            <Button>Button</Button>
+          </div>
+          <div style={{ marginBottom: "20px" }}>
+            <Button variant="secondary">Button</Button>
+          </div>
+          <div style={{ marginBottom: "20px" }}>
+            <Button variant="outlined">Button</Button>
+          </div>
         </div>
       </main>
 
