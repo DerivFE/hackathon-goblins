@@ -5,7 +5,6 @@
             "components/*": ["src/components/*"],
             "hooks/*": ["src/hooks/*"],
             "helpers/*": ["src/helpers/*"],
-            "svg/*": ["src/assets/svg/*"],
             "images/*": ["src/assets/images/*"],
             "styles/*": ["styles/*"],
         }
