@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "components/Accordion";
+import { Text } from "components/Text";
 
 export default function Home() {
   return (
@@ -80,6 +81,16 @@ export default function Home() {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
+          <Text type="heading1" as="h1">
+            This is a H1
+          </Text>
+          <Text type="heading2" as="h2">
+            This is a H1
+          </Text>
+          <Text type="heading3" as="h3" color="textLight">
+            This is a H1
+          </Text>
+          <Text>This is a default text component</Text>
         </div>
       </main>
 
