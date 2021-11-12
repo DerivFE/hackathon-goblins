@@ -1,6 +1,12 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../src/components/Accordion";
 
 export default function Home() {
   return (
@@ -17,7 +23,7 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
+          Get started by editing{" "}
           <code className={styles.code}>pages/index.js</code>
         </p>
 
@@ -50,6 +56,31 @@ export default function Home() {
             </p>
           </a>
         </div>
+        <div style={{ maxWidth: "600px", width: "100%" }}>
+          <Accordion type="multiple" collapsible>
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Is it accessible?</AccordionTrigger>
+              <AccordionContent>
+                Yes. It adheres to the WAI-ARAI design pattern.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-2">
+              <AccordionTrigger>Is it unstyled?</AccordionTrigger>
+              <AccordionContent>
+                Yes. It&apos;s unstyled by default, giving you freedom over the
+                look and feel.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-3">
+              <AccordionTrigger>Can it be animated?</AccordionTrigger>
+              <AccordionContent>
+                Yes! You can animate the Accordion with CSS or JavaScript.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
       </main>
 
       <footer className={styles.footer}>
@@ -58,12 +89,12 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
+  );
 }
