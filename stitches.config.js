@@ -1,21 +1,48 @@
 import { createStitches } from "@stitches/react";
 
 export const { styled, getCssText, CSS, keyframes } = createStitches({
+  media: {
+    desktop: "(max-width: 1980px)",
+    laptopL: "(max-width: 1440px)",
+    laptopM: "(max-width: 1200px)",
+    laptop: "(max-width: 1024px)",
+    tabletL: "(max-width: 992px)",
+    tablet: "(max-width: 768px)",
+    tabletS: "(max-width: 576px)",
+    mobileL: "(max-width: 425px)",
+    mobileM: "(max-width: 375px)",
+    mobileS: "(max-width: 320px)",
+  },
   theme: {
     fonts: {},
-    colors: {},
-    fontSizes: {},
-    media: {
-      mobileS: "(max-width: 320px)",
-      mobileM: "(max-width: 375px)",
-      mobileL: "(max-width: 425px)",
-      tabletS: "(max-width: 576px)",
-      tablet: "(max-width: 768px)",
-      tabletL: "(max-width: 992px)",
-      laptop: "(max-width: 1024px)",
-      laptopM: "(max-width: 1200px)",
-      laptopL: "(max-width: 1440px)",
-      desktop: "(max-width: 1980px)",
+    colors: {
+      coral: "#ff444f",
+      blue: "#85ACB0",
+      white: "#ffffff",
+      text: "#333333",
+      textLight: "#c2c2c2",
+      black: "#0e0e0e",
+    },
+    fontSizes: {
+      1: "10px",
+      2: "12px",
+      3: "14px",
+      4: "16px",
+      5: "20px",
+      6: "24px",
+      7: "32px",
+      8: "48px",
+      9: "64px",
+      10: "80px",
+    },
+    space: {
+      1: "8px",
+      2: "16px",
+      3: "24px",
+      4: "32px",
+      5: "40px",
+      6: "48px",
+      7: "80px",
     },
     utils: {
       p: (config) => (value) => ({
