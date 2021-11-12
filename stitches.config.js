@@ -1,6 +1,18 @@
 import { createStitches } from "@stitches/react";
 
 export const { styled, getCssText, CSS, keyframes } = createStitches({
+  media: {
+    desktop: "(max-width: 1980px)",
+    laptopL: "(max-width: 1440px)",
+    laptopM: "(max-width: 1200px)",
+    laptop: "(max-width: 1024px)",
+    tabletL: "(max-width: 992px)",
+    tablet: "(max-width: 768px)",
+    tabletS: "(max-width: 576px)",
+    mobileL: "(max-width: 425px)",
+    mobileM: "(max-width: 375px)",
+    mobileS: "(max-width: 320px)",
+  },
   theme: {
     fonts: {},
     colors: {
@@ -31,18 +43,6 @@ export const { styled, getCssText, CSS, keyframes } = createStitches({
       5: "40px",
       6: "48px",
       7: "80px",
-    },
-    media: {
-      mobileS: "(max-width: 320px)",
-      mobileM: "(max-width: 375px)",
-      mobileL: "(max-width: 425px)",
-      tabletS: "(max-width: 576px)",
-      tablet: "(max-width: 768px)",
-      tabletL: "(max-width: 992px)",
-      laptop: "(max-width: 1024px)",
-      laptopM: "(max-width: 1200px)",
-      laptopL: "(max-width: 1440px)",
-      desktop: "(max-width: 1980px)",
     },
     utils: {
       p: (config) => (value) => ({
