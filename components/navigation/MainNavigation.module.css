@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  height: 73px;
+  align-items: center;
+  justify-content: center;
+  background-color: #0e0e0e;
+}
+
+.container > .sub {
+  display: inline-flex;
+  align-items: center;
+  width: 80%;
+  color: #fff;
+}
+
+.sub > .link_container {
+  display: inline-flex;
+  margin-left: 5%;
+  margin-right: auto;
+  color: #fff;
+}
+
+.link_container > a {
+  position: relative;
+  margin-right: 40px;
+  line-height: 1.5;
+}
+
+.link_container > a:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ff444f;
+  visibility: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.link_container > .selected:before,
+.link_container > a:hover:before {
+  width: 20px;
+  visibility: visible;
+}
+
+.sub > .branding_text {
+  font-size: 24px;
+  font-weight: 400;
+  margin-left: 24px;
+}
