@@ -9,6 +9,7 @@ import {
 } from "components/Accordion";
 import { Text } from "components/Text";
 import { Button } from "components/Button";
+import { Box } from "components/Box";
 import Layout from "components/layout/Layout";
 
 const Home = () => {
@@ -102,6 +103,18 @@ const Home = () => {
           <div style={{ marginBottom: "20px" }}>
             <Button variant="outlined">Button</Button>
           </div>
+          <Box jc="sb" ai="center" style={{ marginBottom: "20px" }}>
+            Row
+            <Button>Button</Button>
+            <Button>Button</Button>
+            <Button>Button</Button>
+          </Box>
+          <Box col jc="center" ai="center">
+            Column
+            <Button>Button</Button>
+            <Button>Button</Button>
+            <Button>Button</Button>
+          </Box>
         </div>
       </main>
 
