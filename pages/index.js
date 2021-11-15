@@ -10,6 +10,7 @@ import {
 import { Text } from "components/Text";
 import { Button } from "components/Button";
 import Layout from "components/layout/Layout";
+import {Carousel, CarouselItem} from "components/Carousel";
 
 const Home = () => {
   return (
@@ -101,6 +102,16 @@ const Home = () => {
           </div>
           <div style={{ marginBottom: "20px" }}>
             <Button variant="outlined">Button</Button>
+          </div>
+          <div>
+            <Carousel title="Carousel Component">
+                <CarouselItem>
+                    Item 1
+                </CarouselItem>
+                <CarouselItem>
+                    Item 2
+                </CarouselItem>
+            </Carousel>
           </div>
         </div>
       </main>
