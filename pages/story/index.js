@@ -151,4 +151,4 @@ const Story = () => {
   );
 };
 
-export default Home;
+export default Story;
