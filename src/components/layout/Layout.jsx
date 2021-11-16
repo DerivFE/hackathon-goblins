@@ -14,12 +14,22 @@ const Layout = ({ children, description, page_name }) => {
         <title>Deriv API | {page_name || default_page_name}</title>
         <meta name="description" content={description || default_description} />
         <link href="/deriv.png" rel="icon" sizes="96x96" type="image/png" />
+        <link
+          rel="preload"
+          href="/fonts/IBMPlexSansVar-Roman.woff2"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/IBMPlexSansVar-Italic.woff2"
+          as="font"
+          crossOrigin=""
+        />
       </Head>
-      <div className={css.main}>
-        <TopNavigation />
-        <MainNavigation />
-        {children}
-      </div>
+      <TopNavigation />
+      <MainNavigation />
+      <div className={css.main}>{children}</div>
     </>
   );
 };
