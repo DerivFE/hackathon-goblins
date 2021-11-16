@@ -14,7 +14,6 @@ export const { styled, getCssText, CSS, keyframes } = createStitches({
     mobileS: "(max-width: 320px)",
   },
   theme: {
-    fonts: {},
     colors: {
       coral: "#ff444f",
       blue: "#85ACB0",
@@ -44,83 +43,82 @@ export const { styled, getCssText, CSS, keyframes } = createStitches({
       6: "48px",
       7: "80px",
     },
+    fonts: {},
   },
   utils: {
-    p: (config) => (value) => ({
+    p: (value) => ({
       paddingTop: value,
       paddingBottom: value,
       paddingLeft: value,
       paddingRight: value,
     }),
-    pt: (config) => (value) => ({
+    pt: (value) => ({
       paddingTop: value,
     }),
-    pr: (config) => (value) => ({
+    pr: (value) => ({
       paddingRight: value,
     }),
-    pb: (config) => (value) => ({
+    pb: (value) => ({
       paddingBottom: value,
     }),
-    pl: (config) => (value) => ({
+    pl: (value) => ({
       paddingLeft: value,
     }),
-    px: (config) => (value) => ({
+    px: (value) => ({
       paddingLeft: value,
       paddingRight: value,
     }),
-    py: (config) => (value) => ({
+    py: (value) => ({
       paddingTop: value,
       paddingBottom: value,
     }),
 
-    m: (config) => (value) => ({
+    m: (value) => ({
       marginTop: value,
       marginBottom: value,
       marginLeft: value,
       marginRight: value,
     }),
-    mt: (config) => (value) => ({
+    mt: (value) => ({
       marginTop: value,
     }),
-    mr: (config) => (value) => ({
+    mr: (value) => ({
       marginRight: value,
     }),
-    mb: (config) => (value) => ({
+    mb: (value) => ({
       marginBottom: value,
     }),
-    ml: (config) => (value) => ({
+    ml: (value) => ({
       marginLeft: value,
     }),
-    mx: (config) => (value) => ({
+    mx: (value) => ({
       marginLeft: value,
       marginRight: value,
     }),
-    my: (config) => (value) => ({
+    my: (value) => ({
       marginTop: value,
       marginBottom: value,
     }),
 
-    size: (config) => (value) => ({
+    size: (value) => ({
       width: value,
       height: value,
     }),
 
-    ta: (config) => (value) => ({ textAlign: value }),
-    lh: (config) => (value) => ({ lineHeight: value }),
+    ta: (value) => ({ textAlign: value }),
+    lh: (value) => ({ lineHeight: value }),
 
-    fd: (config) => (value) => ({ flexDirection: value }),
-    fw: (config) => (value) => ({ flexWrap: value }),
+    fd: (value) => ({ flexDirection: value }),
+    fw: (value) => ({ flexWrap: value }),
 
-    ai: (config) => (value) => ({ alignItems: value }),
-    ac: (config) => (value) => ({ alignContent: value }),
-    jc: (config) => (value) => ({ justifyContent: value }),
-    as: (config) => (value) => ({ alignSelf: value }),
-    fg: (config) => (value) => ({ flexGrow: value }),
-    fs: (config) => (value) => ({ flexShrink: value }),
-    fb: (config) => (value) => ({ flexBasis: value }),
+    ai: (value) => ({ alignItems: value }),
+    ac: (value) => ({ alignContent: value }),
+    jc: (value) => ({ justifyContent: value }),
+    as: (value) => ({ alignSelf: value }),
+    fg: (value) => ({ flexGrow: value }),
+    fs: (value) => ({ flexShrink: value }),
+    fb: (value) => ({ flexBasis: value }),
 
-    bc: (config) => (value) => ({
-      backgroundColor: value,
-    }),
+    bc: (value) => ({ backgroundColor: value }),
   },
 });
