@@ -11,6 +11,7 @@ import { Text } from "components/Text";
 import { Button } from "components/Button";
 import { Box } from "components/Box";
 import Layout from "components/layout/Layout";
+import {Carousel, CarouselItem} from "components/Carousel";
 
 const Home = () => {
   return (
@@ -115,6 +116,16 @@ const Home = () => {
             <Button>Button</Button>
             <Button>Button</Button>
           </Box>
+          <div>
+            <Carousel title="Carousel Component">
+                <CarouselItem>
+                    Item 1
+                </CarouselItem>
+                <CarouselItem>
+                    Item 2
+                </CarouselItem>
+            </Carousel>
+          </div>
         </div>
       </main>
 
