@@ -13,6 +13,18 @@
   color: #fff;
 }
 
+.sub > .deriv_logo {
+  width: 183px;
+}
+
+.sub > .close_icon {
+  display: none;
+}
+
+.sub > .hamburger_icon {
+  display: none;
+}
+
 .sub > .link_container {
   display: inline-flex;
   margin-left: 5%;
@@ -22,8 +34,11 @@
 
 .link_container > a {
   position: relative;
-  margin-right: 40px;
   line-height: 1.5;
+}
+
+.link_container > a:not(:last-child) {
+  margin-right: 40px;
 }
 
 .link_container > a:before {
@@ -48,4 +63,37 @@
   font-size: 24px;
   font-weight: 400;
   margin-left: 24px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    height: 56px;
+  }
+
+  .container > .sub {
+    width: 90%;
+  }
+
+  .sub > .deriv_logo {
+    width: 84px;
+  }
+
+  .sub > .close_icon {
+    width: 16px;
+    margin-right: 12px;
+  }
+
+  .sub > .hamburger_icon {
+    display: block;
+    margin-right: 12px;
+  }
+
+  .sub > .link_container {
+    display: none;
+  }
+
+  .sub > .branding_text {
+    font-size: 16px;
+    margin-left: 8px;
+  }
 }
