@@ -1,0 +1,10 @@
+.link {
+  text-decoration: none;
+  color: var(--colors-coral);
+}
+
+.unstyled {
+  appearance: none;
+  color: inherit;
+  width: fit-content;
+}
