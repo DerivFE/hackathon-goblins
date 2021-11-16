@@ -27,11 +27,9 @@ const Layout = ({ children, description, page_name }) => {
           crossOrigin=""
         />
       </Head>
-      <div className={css.main}>
-        <TopNavigation />
-        <MainNavigation />
-        {children}
-      </div>
+      <TopNavigation />
+      <MainNavigation />
+      <div className={css.main}>{children}</div>
     </>
   );
 };

@@ -1,3 +1,10 @@
 .main {
-  min-height: 100vh;
+  margin-top: 105px;
+  min-height: 1000vh;
+}
+
+@media (max-width: 768px) {
+  .main {
+    margin-top: 56px;
+  }
 }
