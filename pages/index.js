@@ -11,6 +11,7 @@ import { Text } from "components/Text";
 import { Button } from "components/Button";
 import { Box } from "components/Box";
 import Layout from "components/layout/Layout";
+import { Checkbox, CheckboxItem } from "components/Checkbox";
 
 const Home = () => {
   return (
@@ -115,6 +116,19 @@ const Home = () => {
             <Button>Button</Button>
             <Button>Button</Button>
           </Box>
+        </div>
+        <div style={{ maxWidth: "690px"}}>
+          <Checkbox>
+            <CheckboxItem>
+              Register your app with Deriv, and add a percentage markup to the contract prices to profit from every contract payout.
+            </CheckboxItem>
+            <CheckboxItem>
+              Register your app with Deriv, and add a percentage markup to the contract prices to profit from every contract payout.
+            </CheckboxItem>
+            <CheckboxItem>
+              Register your app with Deriv, and add a percentage markup to the contract prices to profit from every contract payout.
+            </CheckboxItem>
+          </Checkbox>
         </div>
       </main>
 
