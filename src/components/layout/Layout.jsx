@@ -15,11 +15,9 @@ const Layout = ({ children, description, page_name }) => {
         <meta name="description" content={description || default_description} />
         <link href="/deriv.png" rel="icon" sizes="96x96" type="image/png" />
       </Head>
-      <div className={css.main}>
-        <TopNavigation />
-        <MainNavigation />
-        {children}
-      </div>
+      <TopNavigation />
+      <MainNavigation />
+      <div className={css.main}>{children}</div>
     </>
   );
 };

@@ -1,4 +1,7 @@
 .container {
+  position: fixed;
+  width: 100%;
+  top: 32px;
   display: flex;
   height: 73px;
   align-items: center;
@@ -15,10 +18,6 @@
 
 .sub > .deriv_logo {
   width: 183px;
-}
-
-.sub > .close_icon {
-  display: none;
 }
 
 .sub > .hamburger_icon {
@@ -67,6 +66,7 @@
 
 @media (max-width: 768px) {
   .container {
+    top: 0;
     height: 56px;
   }
 
