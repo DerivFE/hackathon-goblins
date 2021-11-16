@@ -9,15 +9,17 @@ import {
 import { Text } from "components/Text";
 import { Box } from "components/Box";
 import { Link } from "components/Link/Link";
+import DocWrapper from "components/tabs/DocWrapper";
 
 const FAQ = () => {
   return (
     <Layout>
       <Box col>
-        <Text as="h1" type="heading2" css={{ mb: "40px", ta: "center" }}>
-          FAQ
-        </Text>
-        <Accordion type="multiple" collapsible="true">
+        <DocWrapper value='/docs/faq'>
+          <Text as="h1" type="heading2" css={{ mb: "40px", ta: "center" }}>
+            FAQ
+          </Text>
+          <Accordion type="multiple" collapsible="true">
           <AccordionItem value="item-1">
             <AccordionTrigger>
               What is the easiest way to get started with Deriv API?
@@ -253,6 +255,7 @@ const FAQ = () => {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
+        </DocWrapper>
       </Box>
     </Layout>
   );

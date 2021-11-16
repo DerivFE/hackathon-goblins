@@ -2,6 +2,7 @@
 import React from "react";
 import * as Tabs from '@radix-ui/react-tabs';
 import { styled } from "stitches.config";
+import Link from 'next/link';
 
 const StyledTabs = styled(Tabs.Root, {
   borderRadius: 6,
@@ -29,6 +30,7 @@ const StyledTrigger = styled(Tabs.Trigger, {
   alignItems: 'center',
   borderLeft: '4px solid transparent',
   color: '#333',
+  cursor: 'pointer',
   display: 'flex',
   height: '44px',
   lineHeight: 1.88,
@@ -42,7 +44,7 @@ const StyledTrigger = styled(Tabs.Trigger, {
     borderBottomLeftRadius: 4,
     transition: 'all 0.2s ease-in-out',
   },
-  '&[data-state="active"]': {
+  '&[active="true"]': {
     backgroundColor: 'rgba(240,241,243,0.64)',
     borderBottomLeftRadius: 4,
     borderLeft: '4px solid red',
@@ -68,8 +70,10 @@ export const TabsHeader = React.forwardRef(
 TabsHeader.displayName = "TabsHeader";
 
 export const TabsTrigger = React.forwardRef(
-  ({ children, ...props }, forwardedRef) => (
-    <StyledTrigger {...props} ref={forwardedRef}>{children}</StyledTrigger>
+  ({ children, value, ...props }, forwardedRef) => (
+    <Link href={value}>
+      <StyledTrigger {...props} ref={forwardedRef}>{children}</StyledTrigger>
+    </Link>
   )
 );
 TabsTrigger.displayName = "TabsTrigger";
