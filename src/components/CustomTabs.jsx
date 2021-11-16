@@ -1,17 +1,19 @@
 /* eslint-disable */
 import React from "react";
 import * as Tabs from '@radix-ui/react-tabs';
-import { styled, keyframes } from "stitches.config";
+import { styled } from "stitches.config";
 
 const StyledTabs = styled(Tabs.Root, {
   borderRadius: 6,
+  display: 'flex',
   width: "100%",
 });
 
 const StyledList = styled(Tabs.List, {
-  maxWidth: 220,
-  width: 220,
+  borderRight: '1px solid #eee',
   height: '100vh',
+  minWidth: 220,
+  width: 220,
   zIndex: 10,
 });
 
@@ -52,7 +54,8 @@ const StyledTrigger = styled(Tabs.Trigger, {
 });
 
 const StyledContent = styled(Tabs.Content, {
-  padding: 0,
+  paddingLeft: 42,
+  width: 'calc(100% - 262px)',
 });
 
 export const CustomTabs = StyledTabs;

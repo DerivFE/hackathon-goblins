@@ -14,14 +14,6 @@ import Layout from "components/layout/Layout";
 import { Checkbox, CheckboxItem } from "components/Checkbox";
 import {Carousel, CarouselItem} from "components/Carousel";
 
-import {
-  CustomTabs as Tabs,
-  TabsHeader,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "components/CustomTabs";
-
 const Home = () => {
   return (
     <Layout>
@@ -148,23 +140,6 @@ const Home = () => {
               Register your app with Deriv, and add a percentage markup to the contract prices to profit from every contract payout.
             </CheckboxItem>
           </Checkbox>
-        </div>
-        <div style={{ maxWidth: "600px", width: "100%" }}>
-            <TabsHeader>Deriv API</TabsHeader>
-            <Tabs defaultValue="tab1" orientation="vertical">
-              <TabsList aria-label="tabs example">
-                <TabsTrigger value="tab1">Quickstart</TabsTrigger>
-                <TabsTrigger value="tab2">App registration</TabsTrigger>
-                <TabsTrigger value="tab3">API playground</TabsTrigger>
-                <TabsTrigger value="tab3">API guide</TabsTrigger>
-                <TabsTrigger value="tab3">FAQ</TabsTrigger>
-                <TabsTrigger value="tab3">JSON Schemas</TabsTrigger>
-                <TabsTrigger value="tab3">Bug Bounty</TabsTrigger>
-              </TabsList>
-              <TabsContent value="tab1">Tab one content</TabsContent>
-              <TabsContent value="tab2">Tab two content</TabsContent>
-              <TabsContent value="tab3">Tab three content</TabsContent>
-            </Tabs>
         </div>
       </main>
 
