@@ -1,12 +1,6 @@
 import React from "react";
 import { styled } from "stitches.config";
 import Layout from "components/layout/Layout";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "components/Accordion";
 import { Text } from "components/Text";
 import { Box } from "components/Box";
 import { Link } from "components/Link/Link";
@@ -26,7 +20,7 @@ const QuickStart = () => {
           Quickstart to Deriv API
         </Text>
         <Text as="p" type="paragraph1" css={{ mb: "16px" }}>
-          On this page, you'll find code samples in various programming
+          On this page, you&apos;ll find code samples in various programming
           languages showing you how to work with the Deriv API to perform some
           of the most important operations.
         </Text>
