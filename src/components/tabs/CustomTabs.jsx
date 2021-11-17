@@ -11,7 +11,6 @@ const StyledTabs = styled(Tabs.Root, {
 });
 
 const StyledList = styled(Tabs.List, {
-  borderRight: '1px solid #eee',
   height: '100vh',
   minWidth: 220,
   width: 220,
@@ -56,6 +55,7 @@ const StyledTrigger = styled(Tabs.Trigger, {
 });
 
 const StyledContent = styled(Tabs.Content, {
+  borderLeft: '1px solid #eee',
   paddingLeft: 42,
   width: 'calc(100% - 262px)',
 });
