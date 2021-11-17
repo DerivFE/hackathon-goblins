@@ -37,6 +37,10 @@ export const Text = styled(DEFAULT_TAG, {
           fontSize: "$6",
         },
       },
+      heading4: {
+        lineHeight: "1.5",
+        fontWeight: "bold",
+      },
       subtitle1: {
         fontSize: "$6",
         lineHeight: "1.5",
@@ -51,7 +55,7 @@ export const Text = styled(DEFAULT_TAG, {
       },
       paragraph1: {
         fontSize: "$4",
-        lineHeight: "1.5",
+        lineHeight: "28px",
       },
       paragraph2: {
         fontSize: "$3",

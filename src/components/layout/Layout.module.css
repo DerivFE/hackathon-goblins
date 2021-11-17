@@ -1,6 +1,6 @@
 .main {
   margin-top: 105px;
-  min-height: 1000vh;
+  min-height: 100vh;
 }
 
 @media (max-width: 768px) {
