@@ -11,9 +11,29 @@ import { Button } from "components/Button";
 import { Box } from "components/Box";
 import { Checkbox, CheckboxItem } from "components/Checkbox";
 import { Carousel, CarouselItem } from "components/Carousel";
+import { Codeblock } from "components/Codeblock/Codeblock";
+import { python_text } from "components/Codeblock/demos/python";
+import { javascript_text } from "components/Codeblock/demos/javascript";
+import { php_text } from "components/Codeblock/demos/php";
 import Home from "pages";
 
 const Story = () => {
+
+  const content = {
+    javascript: {
+        name: "Java",
+        content: javascript_text,
+    },
+    python: {
+        name:"Python",
+        content:python_text,
+        },
+    php: {
+        name:"PHP",
+        content:php_text,
+    }
+}
+
   return (
     <>
       <main className={styles.main}>
@@ -133,6 +153,10 @@ const Story = () => {
             </CheckboxItem>
           </Checkbox>
         </div>
+        <div style={{ maxWidth: "888px" }}>
+          <Codeblock contents={content}/>
+        </div>
+        
       </main>
 
       <footer className={styles.footer}>

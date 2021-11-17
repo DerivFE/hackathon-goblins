@@ -21,6 +21,8 @@ export const { styled, getCssText, CSS, keyframes } = createStitches({
       text: "#333333",
       textLight: "#c2c2c2",
       black: "#0e0e0e",
+      grey: "#1d1f20",
+      lightGrey: "#d6d6d6",
     },
     fontSizes: {
       1: "10px",
