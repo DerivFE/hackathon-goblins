@@ -1,0 +1,39 @@
+.main_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  width: 80%;
+}
+
+.hero_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1008px;
+  height: 100%;
+  color: white;
+  z-index: 2;
+}
+
+.hero_header {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.hero_text {
+  font-size: 24px;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  margin-bottom: 0;
+}

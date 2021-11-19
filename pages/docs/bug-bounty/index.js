@@ -1,4 +1,4 @@
-import Layout from "components/layout/Layout";
+import Layout from "components/Layout/Layout";
 import css from "./BugBounty.module.css";
 import { Box } from "components/Box";
 import DocWrapper from "components/tabs/DocWrapper";
