@@ -30,8 +30,8 @@ const BugBounty = () => (
                 </a>
               </div>
               <div className={css.cta_grid_box}>
-                <h2>Got questions?</h2>
-                <p>
+                <h2 className={css.margin_button_8}>Got questions?</h2>
+                <p className={css.margin_button_16}>
                   Email us at
                   <a href="mailto:security@deriv.com"> security@deriv.com</a> for
                   more information.
