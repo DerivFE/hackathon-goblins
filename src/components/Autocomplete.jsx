@@ -128,12 +128,23 @@ const Autocomplete = ({
 
   React.useEffect(() => {
     if (value !== getItemValue(selectedItem)) {
-      onSelect?.({});
+      onSelect?.(null);
     }
   }, [value]);
 
   React.useEffect(() => {
-    const maybeScrollItemIntoView = () => {};
+    const getSelectedItemIndex = () => {
+      return items.findIndex((item) => {
+        return getItemKey(item) === getItemKey(selectedItem);
+      });
+    };
+    const maybeScrollItemIntoView = () => {
+      const index = getSelectedItemIndex();
+      menuRef.current
+        ?.querySelector(`div:nth-child(${index + 1})`)
+        ?.scrollIntoView();
+      setHighlightedIndex(index);
+    };
 
     if (isOpen) {
       setMenuPositions();
@@ -217,6 +228,8 @@ const Autocomplete = ({
   };
 
   const getFilteredItems = () => {
+    if (selectedItem) return items;
+
     let filteredItems = items.filter((item) => {
       const label = getItemValue(item);
       return label.toLowerCase().indexOf(value.toLowerCase()) > -1;
