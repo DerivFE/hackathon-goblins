@@ -1,13 +1,18 @@
 import classNames from "classnames";
 import Image from "next/image";
+import { Carousel, CarouselItem } from "components/Carousel";
 import { Checkbox, CheckboxItem } from "components/Checkbox";
 import { Text } from "components/Text";
 import HeroImage from "components/Navigation/HeroImage";
 import Layout from "components/Layout/Layout";
 import css from "./index.module.css";
 import AutomationIcon from "assets/svg/automation.svg";
+import JSLibraryIcon from "assets/svg/js-library.svg";
 import IntegrationIcon from "assets/svg/integration.svg";
 import ExecutionIcon from "assets/svg/execution.svg";
+import SignUpIcon from "assets/svg/sign-up.svg";
+import RegisterIcon from "assets/svg/register-your-app.svg";
+import GuideIcon from "assets/svg/guide.svg";
 
 const Home = () => {
   return (
@@ -125,6 +130,7 @@ const Home = () => {
                   >
                     1. Sign up
                   </Text>
+                  <SignUpIcon />
                 </div>
                 <div className={css.body}>
                   <Text type="paragraph1">
@@ -141,6 +147,7 @@ const Home = () => {
                   >
                     2. Register your app
                   </Text>
+                  <RegisterIcon />
                 </div>
                 <div className={css.body}>
                   <Text type="paragraph1">
@@ -156,6 +163,7 @@ const Home = () => {
                   >
                     3. Read our guide
                   </Text>
+                  <GuideIcon />
                 </div>
                 <div className={css.body}>
                   <Text type="paragraph1">
@@ -165,7 +173,43 @@ const Home = () => {
                 </div>
               </div>
             </div>
+            <Text type="paragraph2">
+              By using our API, you confirm that you have read and agreed to our
+              terms and conditions.
+            </Text>
           </div>
+        </div>
+        <div className={classNames(css.testimonials, css.fold)}>
+          <Carousel title="See what our clients say">
+            <CarouselItem>
+              <div className={css.testimony}>
+                <Text type="paragraph1" css={{ mb: "32px" }}>
+                  Probably the best API for making your business successful in
+                  trading derivatives out there
+                </Text>
+                <span className={css.underline} />
+                <Text type="paragraph1">
+                  <strong>Thiago</strong>, Entrepreneur | Brazil
+                </Text>
+              </div>
+            </CarouselItem>
+            <CarouselItem>
+              <div className={css.testimony}></div>
+            </CarouselItem>
+          </Carousel>
+        </div>
+        <div className={classNames(css.library, css.fold)}>
+          <JSLibraryIcon />
+          <Text
+            type="heading2"
+            css={{ mb: "12px", maxWidth: "735px", textAlign: "center" }}
+          >
+            Comprehensive all-in-one JavaScript client library
+          </Text>
+          <Text type="subtitle1" css={{ maxWidth }}>
+            Simplify your development processes and get your app up and running
+            faster with our all-in-one client library
+          </Text>
         </div>
       </div>
     </Layout>
