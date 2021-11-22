@@ -1271,7 +1271,7 @@ if __name__ == "__main__":
     ws = websocket.WebSocketApp(apiUrl, on_message=on_message, on_open=on_open)
     ws.run_forever()`;
 
-    export const py_keep_alive = `# This is an example of using Python to get a contract proposal  and keep the connection alive via the Deriv/Binary API.
+export const py_keep_alive = `# This is an example of using Python to get a contract proposal  and keep the connection alive via the Deriv/Binary API.
 # Link is kept alive by sending a ping every 30 seconds.
 # The example uses the websockets library.
 # Note that the websockets library is more sophisticated than the websocket library used in the other examples. 

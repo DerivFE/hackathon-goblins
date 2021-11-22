@@ -26,7 +26,7 @@ import {
   py_keep_alive,
   py_proposal,
   py_ticks,
-} from "./codeblocks";
+} from "../../src/components/Codeblock/demos/codeblocks";
 import DocWrapper from "components/tabs/DocWrapper";
 
 const StyledLi = styled("li", {
