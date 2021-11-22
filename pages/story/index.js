@@ -11,6 +11,7 @@ import { Button } from "components/Button";
 import { Box } from "components/Box";
 import { Checkbox, CheckboxItem } from "components/Checkbox";
 import { Carousel, CarouselItem } from "components/Carousel";
+import { Input } from "../../src/components/Input"
 import Home from "pages";
 
 const Story = () => {
@@ -132,6 +133,9 @@ const Story = () => {
               contract prices to profit from every contract payout.
             </CheckboxItem>
           </Checkbox>
+        </div>
+        <div style={{ maxWidth: "690px" }}>
+          <Input label="this is a label" placeholder_text="this is a place holder" />
         </div>
       </main>
 
