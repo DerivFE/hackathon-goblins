@@ -14,8 +14,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
-  max-width: 1440px;
+  width: 100%;
 }
 
 .fold {
@@ -49,7 +48,8 @@
 
 .benefit_icon_container {
   display: grid;
-  width: 100%;
+  width: 80%;
+  max-width: 1440px;
   grid-template-columns: repeat(3, 1fr);
   margin-bottom: 80px;
 }
@@ -67,7 +67,8 @@
 
 .benefit_grid {
   display: grid;
-  width: 100%;
+  width: 80%;
+  max-width: 1440px;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 260px 260px;
   grid-gap: 80px 24px;
@@ -79,5 +80,35 @@
 }
 
 .benefit_grid > .item_container:last-child {
+  justify-content: center;
+}
+
+.earn_container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f7fa;
+}
+
+.earn_container > .inner_container {
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  max-width: 1440px;
+}
+
+.earn_container > .inner_container > .text_container {
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.earn_container > .inner_container > .check_container {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
   justify-content: center;
 }

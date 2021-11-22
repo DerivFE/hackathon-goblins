@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import Image from "next/image";
+import { Checkbox, CheckboxItem } from "components/Checkbox";
 import { Text } from "components/Text";
 import HeroImage from "components/Navigation/HeroImage";
 import Layout from "components/Layout/Layout";
@@ -25,7 +26,7 @@ const Home = () => {
           </div>
         </HeroImage>
         <div className={classNames(css.content, css.fold)}>
-          <Text as="h2" type="heading2" css={{ color: "#333", mb: "10px" }}>
+          <Text as="h2" type="heading2" css={{ color: "#333", mb: "40px" }}>
             Benefits of using Deriv API
           </Text>
           <div className={css.benefit_icon_container}>
@@ -81,6 +82,32 @@ const Home = () => {
                 traders or customers, and have a chance to earn more or build
                 your own business.
               </Text>
+            </div>
+          </div>
+        </div>
+        <div className={classNames(css.earn_container, css.fold)}>
+          <div className={css.inner_container}>
+            <div className={css.text_container}>
+              <Text type="heading2" css={{ color: "#333", maxWidth: "80%" }}>
+                Ways to earn with Deriv API
+              </Text>
+            </div>
+            <div className={css.check_container}>
+              <Checkbox>
+                <CheckboxItem>
+                  Register your app with Deriv, and add a percentage markup to
+                  the contract prices to profit from every contract payout.
+                </CheckboxItem>
+                <CheckboxItem>
+                  Sign up as an affiliate, build your app, and get commission on
+                  every signup and trade completed via your app.
+                </CheckboxItem>
+                <CheckboxItem>
+                  Sign up as a payment agent , and use our API to build your own
+                  custom payment website to earn commission on every payment you
+                  process for Deriv’s clients.
+                </CheckboxItem>
+              </Checkbox>
             </div>
           </div>
         </div>
