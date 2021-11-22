@@ -11,6 +11,7 @@ import { Button } from "components/Button";
 import { Box } from "components/Box";
 import { Checkbox, CheckboxItem } from "components/Checkbox";
 import { Carousel, CarouselItem } from "components/Carousel";
+import { Input } from "../../src/components/Input"
 import { Codeblock } from "components/Codeblock/Codeblock";
 import { python_text } from "components/Codeblock/demos/python";
 import { javascript_text } from "components/Codeblock/demos/javascript";
@@ -153,6 +154,7 @@ const Story = () => {
             </CheckboxItem>
           </Checkbox>
         </div>
+          <Input label="this is a label" placeholder_text="this is a place holder" maxWidth="690px"/>
         <div style={{ maxWidth: "888px" }}>
           <Codeblock contents={content}/>
         </div>
