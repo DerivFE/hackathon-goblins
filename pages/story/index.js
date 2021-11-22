@@ -134,9 +134,7 @@ const Story = () => {
             </CheckboxItem>
           </Checkbox>
         </div>
-        <div style={{ maxWidth: "690px" }}>
-          <Input label="this is a label" placeholder_text="this is a place holder" />
-        </div>
+          <Input label="this is a label" placeholder_text="this is a place holder" maxWidth="690px"/>
       </main>
 
       <footer className={styles.footer}>

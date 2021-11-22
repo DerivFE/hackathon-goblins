@@ -37,27 +37,37 @@ const Fieldset = styled("div", {
         lineHeight: "1.4",
         color: "#333333",
         backgroundColor: "white",
+        marginTop: "0",
         marginBottom: "0",
         padding: "4px",
     }
 })
 
+const FieldsetWrapper = styled("div", {
+    width: "100%",
+    border: "none",
+})
 
-export const Input = ({label, placeholder_text}) => {
+
+export const Input = ({label, placeholder_text, maxWidth}) => {
 
     return (
         <>
-        <Fieldset>
-            <div className="input-wrapper first">
-                <p className="helper-label">{label}</p>
-                <input
-                id="application-name"
-                type="text"
-                maxlength="48"
-                placeholder={placeholder_text}
-                />
-            </div>
-        </Fieldset>
+        <FieldsetWrapper css={{
+            maxWidth: maxWidth,
+            }}>
+            <Fieldset>
+                <div className="input-wrapper first">
+                    <p className="helper-label">{label}</p>
+                    <input
+                    id="application-name"
+                    type="text"
+                    maxlength="48"
+                    placeholder={placeholder_text}
+                    />
+                </div>
+            </Fieldset>
+        </FieldsetWrapper>
         </>
     )
 }
