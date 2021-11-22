@@ -62,7 +62,7 @@ export const Input = ({label, placeholder_text, maxWidth}) => {
                     <input
                     id="application-name"
                     type="text"
-                    maxlength="48"
+                    maxLength="48"
                     placeholder={placeholder_text}
                     />
                 </div>
