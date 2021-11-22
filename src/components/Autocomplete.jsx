@@ -4,14 +4,15 @@ import { styled } from "stitches.config";
 const StyledAutocomplete = styled("div", {
   display: "block",
   position: "relative",
-  fontSize: "$fontSizes#3",
+  fontSize: "$fontSizes$3",
   flex: 1,
+  background: "inherit",
 });
 
 const StyledMenu = styled("div", {
   borderRadius: "3px",
   boxShadow: "0 2px 12px rgba(0, 0, 0, 0.1)",
-  background: "rgba(255, 255, 255, 0.9)",
+  background: "#000",
   padding: "2px 0",
   position: "absolute",
   overflow: "auto",
@@ -23,11 +24,12 @@ const StyledMenuItem = styled("div", {
   cursor: "pointer",
   display: "flex",
   alignItems: "center",
-  padding: "1rem 1.6rem",
+  padding: "10px 16px",
+  boxSizing: "border-box",
   variants: {
     highlighted: {
       true: {
-        backgroundColor: "lightgray",
+        backgroundColor: "$colors$grey",
       },
     },
   },
@@ -40,6 +42,9 @@ const StyledInput = styled("input", {
   padding: "10px 12px",
   outline: 0,
   width: "100%",
+  background: "inherit",
+  color: "inherit",
+  boxSizing: "border-box",
 });
 
 const StyledLabel = styled("label", {
@@ -54,7 +59,8 @@ const StyledLabel = styled("label", {
       },
       true: {
         transform: "translate(0.7rem, -0.4rem) scale(0.75)",
-        backgroundColor: "$white",
+        backgroundColor: "$black",
+        color: "$white",
         px: "4px",
       },
     },
@@ -98,6 +104,7 @@ const Autocomplete = ({
   const [highlightedIndex, setHighlightedIndex] = React.useState(null);
   const [dropdownPosition, setDropdownPosition] = React.useState({});
   const inputRef = React.useRef();
+  const menuRef = React.useRef();
   const [value, setValue] = React.useState("");
 
   const ignoreBlur = React.useRef(false);
@@ -116,9 +123,14 @@ const Autocomplete = ({
   React.useEffect(() => {
     if (selectedLabel) {
       setValue(selectedLabel);
-      onSelect?.({});
     }
   }, [selectedLabel]);
+
+  React.useEffect(() => {
+    if (value !== getItemValue(selectedItem)) {
+      onSelect?.({});
+    }
+  }, [value]);
 
   React.useEffect(() => {
     const maybeScrollItemIntoView = () => {};
@@ -135,14 +147,15 @@ const Autocomplete = ({
       const items = getFilteredItems();
       if (!items.length) return;
       let index = highlightedIndex === null ? -1 : highlightedIndex;
-      for (let i = 0; i < items.length; i++) {
-        const p = (index + i + 1) % items.length;
-        index = p;
-        break;
-      }
+      index = (index + 1) % items.length;
+
       if (index > -1 && index !== highlightedIndex) {
         setIsOpen(true);
         setHighlightedIndex(index);
+
+        menuRef.current
+          ?.querySelector(`div:nth-child(${index + 1})`)
+          ?.scrollIntoView();
       }
     },
     ArrowUp(event) {
@@ -150,14 +163,15 @@ const Autocomplete = ({
       const items = getFilteredItems();
       if (!items.length) return;
       let index = highlightedIndex === null ? items.length : highlightedIndex;
-      for (let i = 0; i < items.length; i++) {
-        const p = (index - (1 + i) + items.length) % items.length;
-        index = p;
-        break;
-      }
+      index = (index - 1 + items.length) % items.length;
+
       if (index !== items.length) {
         setIsOpen(true);
         setHighlightedIndex(index);
+
+        menuRef.current
+          ?.querySelector(`div:nth-child(${index + 1})`)
+          ?.scrollIntoView();
       }
     },
 
@@ -220,11 +234,14 @@ const Autocomplete = ({
 
     setDropdownPosition({
       maxHeight: window.innerHeight - rect.top - rect.height - 10,
+      width: rect.width,
     });
   };
 
   const highlightItemFromMouse = (index) => {
-    setHighlightedIndex(index);
+    if (index !== highlightedIndex) {
+      setHighlightedIndex(index);
+    }
   };
 
   const selectItemFromMouse = (item) => {
@@ -245,7 +262,7 @@ const Autocomplete = ({
       return (
         <StyledMenuItem
           key={index}
-          onMouseEnter={() => highlightItemFromMouse(index)}
+          onMouseMove={() => highlightItemFromMouse(index)}
           onClick={() => selectItemFromMouse(item)}
           highlighted={highlightedIndex === index}
         >
@@ -255,6 +272,7 @@ const Autocomplete = ({
     });
     return (
       <StyledMenu
+        ref={menuRef}
         style={dropdownPosition}
         onTouchStart={() => setIgnoreBlur(true)}
         onMouseEnter={() => setIgnoreBlur(true)}
@@ -321,11 +339,10 @@ const Autocomplete = ({
   };
 
   const open = isOpen;
+
   return (
     <StyledAutocomplete>
-      <StyledLabel selected={isOpen || !!getItemKey(selectedItem)}>
-        {label}
-      </StyledLabel>
+      <StyledLabel selected={isOpen || !!value}>{label}</StyledLabel>
       <StyledInput
         {...inputProps}
         role="combobox"
