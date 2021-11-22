@@ -1,7 +1,10 @@
 import Layout from "components/layout/Layout";
 import css from "./AppRegistration.module.css";
 import { Box } from "components/Box";
+import { BUtton } from "components/Button";
+import { Input } from "components/Input";
 import DocWrapper from "components/tabs/DocWrapper";
+import { Button } from "components/Button";
 
 const AppRegistration = () => (
   <Layout>
@@ -16,6 +19,15 @@ const AppRegistration = () => (
             <h3>Looking for your API token?</h3>
             <div className={css.cta_button}>Get your API token</div>
           </div>
+          <div className={css.api_token_wrapper}>
+            <Input
+              label="API Token"
+              placeholder_text="Api Token"
+              maxWidth="600px"
+            />
+            <Button variant="primary">Authenticate</Button>
+          </div>
+          <div className={css.horizontal_separator}></div>
         </div>
       </DocWrapper>
     </Box>
