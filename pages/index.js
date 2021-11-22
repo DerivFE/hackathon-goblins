@@ -111,6 +111,62 @@ const Home = () => {
             </div>
           </div>
         </div>
+        <div className={classNames(css.step_container, css.fold)}>
+          <div className={css.inner_container}>
+            <Text type="heading2" css={{ mb: "40px" }}>
+              Get started with our API in 3 simple steps:
+            </Text>
+            <div className={css.steps}>
+              <div className={css.card}>
+                <div className={css.header}>
+                  <Text
+                    type="subtitle1"
+                    css={{ fontWeight: "bold", mb: "8px" }}
+                  >
+                    1. Sign up
+                  </Text>
+                </div>
+                <div className={css.body}>
+                  <Text type="paragraph1">
+                    Create a free Deriv account to access our API (or use your
+                    Binary.com login details).
+                  </Text>
+                </div>
+              </div>
+              <div className={css.card}>
+                <div className={css.header}>
+                  <Text
+                    type="subtitle1"
+                    css={{ fontWeight: "bold", mb: "8px" }}
+                  >
+                    2. Register your app
+                  </Text>
+                </div>
+                <div className={css.body}>
+                  <Text type="paragraph1">
+                    Fill out the registration form to start using Deriv API.
+                  </Text>
+                </div>
+              </div>
+              <div className={css.card}>
+                <div className={css.header}>
+                  <Text
+                    type="subtitle1"
+                    css={{ fontWeight: "bold", mb: "8px" }}
+                  >
+                    3. Read our guide
+                  </Text>
+                </div>
+                <div className={css.body}>
+                  <Text type="paragraph1">
+                    Our API quick start guide covers the essentials you need to
+                    start building your app right away.
+                  </Text>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </Layout>
   );
