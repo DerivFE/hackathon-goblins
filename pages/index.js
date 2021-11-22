@@ -28,54 +28,59 @@ const Home = () => {
           <Text as="h2" type="heading2" css={{ color: "#333", mb: "10px" }}>
             Benefits of using Deriv API
           </Text>
-          <div className={css.benefit_container}>
-            <div className={css.benefit_item}>
-              <AutomationIcon className={css.benefit_icon} />
+          <div className={css.benefit_icon_container}>
+            <div className={css.item_container}>
+              <AutomationIcon className={css.icon} />
               <Text type="subtitle1">Automation</Text>
             </div>
-            <div className={css.benefit_item}>
-              <IntegrationIcon className={css.benefit_icon} />
+            <div className={css.item_container}>
+              <IntegrationIcon className={css.icon} />
               <Text type="subtitle1">Easy Integration</Text>
             </div>
-            <div className={css.benefit_item}>
-              <ExecutionIcon className={css.benefit_icon} />
+            <div className={css.item_container}>
+              <ExecutionIcon className={css.icon} />
               <Text type="subtitle1">Fast Execution</Text>
             </div>
           </div>
           <div className={css.benefit_grid}>
-            <div className={css.benefits}>
-              <Text>Personalisation</Text>
-              <Text>
+            <div className={css.item_container}>
+              <Text type="heading3" css={{ mb: "10px" }}>
+                Personalisation
+              </Text>
+              <Text type="subtitle1" css={{ lineHeight: "2rem" }}>
                 Personalise your trading applications to match your needs.
                 Create charts and views just the way you like them. Develop your
                 trading applications using any common programming language and
                 extend your trading opportunity.
               </Text>
             </div>
-            <div className={css.benefits_image}>
+            <div className={css.item_container}>
               <Image
+                className={css.image}
                 src="/image/personalisation.png"
                 alt="personalisation"
                 width={486}
                 height={260}
               />
             </div>
-            <div className={css.benefits}>
-              <Text>Build a business and earn more</Text>
-              <Text>
-                Create your own trading apps by taking advantage of the power of
-                {`Deriv's`} trading services. Share your apps with fellow
-                traders or customers, and have a chance to earn more or build
-                your own business.
-              </Text>
-            </div>
-            <div className={css.benefits_image}>
+            <div className={css.item_container}>
               <Image
                 src="/image/build-business.png"
                 alt="personalisation"
                 width={486}
                 height={260}
               />
+            </div>
+            <div className={css.item_container}>
+              <Text type="heading3" css={{ mb: "10px" }}>
+                Build a business and earn more
+              </Text>
+              <Text type="subtitle1" css={{ lineHeight: "2rem" }}>
+                Create your own trading apps by taking advantage of the power of
+                {` Deriv's`} trading services. Share your apps with fellow
+                traders or customers, and have a chance to earn more or build
+                your own business.
+              </Text>
             </div>
           </div>
         </div>
