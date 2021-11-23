@@ -20,7 +20,12 @@
 .sub > .deriv_logo {
   width: 183px;
 }
-
+.sub > .branding_text {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 400;
+  margin-left: 24px;
+}
 .sub > .hamburger_icon {
   display: none;
 }
@@ -30,6 +35,7 @@
   margin-left: 5%;
   margin-right: auto;
   color: #fff;
+  align-items: center;
 }
 
 .link_container > a {
@@ -59,10 +65,10 @@
   visibility: visible;
 }
 
-.sub > .branding_text {
-  font-size: 24px;
-  font-weight: 400;
-  margin-left: 24px;
+@media (min-width: 768px) and (max-width: 780px) {
+  .link_container > a:not(:last-child) {
+    margin-right: 20px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -96,5 +102,6 @@
   .sub > .branding_text {
     font-size: 16px;
     margin-left: 8px;
+    padding-top: 4px;
   }
 }
