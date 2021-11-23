@@ -1,6 +1,6 @@
 .container {
   position: fixed;
-  z-index: 999;
+  z-index: 5;
   width: 100%;
   top: 32px;
   display: flex;
@@ -78,7 +78,7 @@
   }
 
   .container > .sub {
-    width: 90%;
+    width: 96%;
   }
 
   .sub > .deriv_logo {
@@ -91,6 +91,7 @@
   }
 
   .sub > .hamburger_icon {
+    width: 16px;
     display: block;
     margin-right: 12px;
   }
