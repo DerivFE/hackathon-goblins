@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "components/layout/Layout";
+import Layout from "components/Layout/Layout";
 import { Text } from "components/Text";
 import { Box } from "components/Box";
 import { Link } from "components/Link/Link";

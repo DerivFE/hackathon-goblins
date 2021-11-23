@@ -11,29 +11,27 @@ import { Button } from "components/Button";
 import { Box } from "components/Box";
 import { Checkbox, CheckboxItem } from "components/Checkbox";
 import { Carousel, CarouselItem } from "components/Carousel";
-import { Input } from "../../src/components/Input"
+import { Input } from "../../src/components/Input";
 import { Codeblock } from "components/Codeblock/Codeblock";
 import { python_text } from "components/Codeblock/demos/python";
 import { javascript_text } from "components/Codeblock/demos/javascript";
 import { php_text } from "components/Codeblock/demos/php";
-import Home from "pages";
 
 const Story = () => {
-
   const content = {
     javascript: {
-        name: "Java",
-        content: javascript_text,
+      name: "Java",
+      content: javascript_text,
     },
     python: {
-        name:"Python",
-        content:python_text,
-        },
+      name: "Python",
+      content: python_text,
+    },
     php: {
-        name:"PHP",
-        content:php_text,
-    }
-}
+      name: "PHP",
+      content: php_text,
+    },
+  };
 
   return (
     <>
@@ -154,11 +152,14 @@ const Story = () => {
             </CheckboxItem>
           </Checkbox>
         </div>
-          <Input label="this is a label" placeholder_text="this is a place holder" maxWidth="690px"/>
+        <Input
+          label="this is a label"
+          placeholder_text="this is a place holder"
+          maxWidth="690px"
+        />
         <div style={{ maxWidth: "888px" }}>
-          <Codeblock contents={content}/>
+          <Codeblock contents={content} />
         </div>
-        
       </main>
 
       <footer className={styles.footer}>
