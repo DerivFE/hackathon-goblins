@@ -83,6 +83,7 @@
   justify-content: center;
 }
 
+.footer,
 .community,
 .library,
 .step_container,
@@ -94,6 +95,7 @@
   background-color: #f5f7fa;
 }
 
+.footer > .inner_container,
 .community > .inner_container,
 .step_container > .inner_container,
 .earn_container > .inner_container {
@@ -200,4 +202,12 @@
 
 .section > span > a {
   color: #ff444f;
+}
+
+.main_container > .footer {
+  height: 38px;
+}
+
+.main_container > .footer > .inner_container {
+  justify-content: flex-start;
 }

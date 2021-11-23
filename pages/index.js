@@ -248,6 +248,11 @@ const Home = () => {
             </div>
           </div>
         </div>
+        <footer className={css.footer}>
+          <div className={css.inner_container}>
+            © 2021 Deriv | All rights reserved
+          </div>
+        </footer>
       </div>
     </Layout>
   );
