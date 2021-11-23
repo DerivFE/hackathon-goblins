@@ -13,16 +13,22 @@ const StyledListWrapper = styled('div', {
   width: 220,
 });
 
+const StyledDiv = styled('div', {
+  minHeight: '95vh',
+  width: '80%',
+  alignSelf: 'center',
+  padding: '105px 0 80px',
+});
+
 const DocWrapper = ({ children, value, ...props }) => {
   return (
-    <div style={{
-        padding: '105px 0 80px',
-        minHeight: '95vh',
-        width: '80%',
-        alignSelf: 'center',
+    <StyledDiv css={{
+        '@tabletL' : {
+          padding: '19px 0 0'
+        },
      }}>
         <Tabs value={value} orientation="vertical" {...props}>
-          <TabsList aria-label={value}>
+          <TabsList aria-label={value} css={{ '@tabletL': { display: 'none'}}}>
             <StyledListWrapper>
               <TabsHeader>Deriv API</TabsHeader>
               <TabsTrigger value="/docs" active={getActiveState('/docs', value)}>Quickstart</TabsTrigger>
@@ -36,7 +42,7 @@ const DocWrapper = ({ children, value, ...props }) => {
           </TabsList>
           <TabsContent value={value}>{children}</TabsContent>
         </Tabs>
-    </div>
+    </StyledDiv>
   );
 };
 
