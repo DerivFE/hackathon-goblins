@@ -1,4 +1,6 @@
 import classNames from "classnames";
+import Link from "next/link";
+import { Button } from "components/Button";
 import Image from "next/image";
 import { Carousel, CarouselItem } from "components/Carousel";
 import { Checkbox, CheckboxItem } from "components/Checkbox";
@@ -206,10 +208,45 @@ const Home = () => {
           >
             Comprehensive all-in-one JavaScript client library
           </Text>
-          <Text type="subtitle1" css={{ maxWidth }}>
+          <Text
+            type="subtitle1"
+            css={{ mb: "32px", maxWidth: "748px", textAlign: "center" }}
+          >
             Simplify your development processes and get your app up and running
             faster with our all-in-one client library
           </Text>
+          <Button>
+            <Text type="paragraph2">Take me to the library</Text>
+          </Button>
+        </div>
+        <div className={classNames(css.community, css.fold)}>
+          <div className={css.inner_container}>
+            <div className={css.section}>
+              <Text type="heading3" css={{ mb: "8px" }}>
+                Get connected
+              </Text>
+              <Text css={{ mb: "16px", fontSize: "16px", lineHeight: "1.5" }}>
+                Discuss ideas and share solutions with developers worldwide.
+              </Text>
+              <Button variant="outlined2">
+                <Text css={{ color: "$white", fontSize: "14px" }}>
+                  Join our community
+                </Text>
+              </Button>
+            </div>
+            <div className={css.section}>
+              <Text type="heading3" css={{ mb: "8px" }}>
+                We’re here to help
+              </Text>
+              <Text css={{ mb: "16px", fontSize: "16px", lineHeight: "1.5" }}>
+                Email us at{" "}
+                <Link href="mailto:john@example.com">
+                  api-support@deriv.com
+                </Link>{" "}
+                if you have any questions.
+              </Text>
+            </div>
+          </div>
         </div>
       </div>
     </Layout>

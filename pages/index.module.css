@@ -83,6 +83,7 @@
   justify-content: center;
 }
 
+.community,
 .library,
 .step_container,
 .earn_container {
@@ -93,6 +94,7 @@
   background-color: #f5f7fa;
 }
 
+.community > .inner_container,
 .step_container > .inner_container,
 .earn_container > .inner_container {
   display: flex;
@@ -181,4 +183,21 @@
 
 .library > svg {
   margin-bottom: 24px;
+}
+
+.main_container > .community {
+  background-color: black;
+  color: white;
+}
+
+.community > .inner_container > .section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.section > span > a {
+  color: #ff444f;
 }
