@@ -7,7 +7,6 @@ const Fieldset = styled("div", {
 
   '& input[type="text"]': {
     width: "100%",
-    height: "40px",
     padding: "0 12px",
     borderRadius: "4px 0 0 4px",
     border: "solid 1px #d6dadb",
@@ -25,7 +24,6 @@ const Fieldset = styled("div", {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: "16px",
     flexWrap: "wrap",
   },
 
@@ -41,6 +39,27 @@ const Fieldset = styled("div", {
     marginBottom: "0",
     padding: "4px",
   },
+  variants: {
+    type: {
+      default: {
+        'input[type="text"]': {
+          height: "36px",
+        },
+        ".input-wrapper": {
+          marginBottom: "16px",
+        },
+      },
+      form: {
+        'input[type="text"]': {
+          height: "40px",
+        },
+        ".input-wrapper": {
+          marginBottom: "40px",
+        },
+      },
+    },
+  },
+  defaultVariants: { type: "default" },
 });
 
 const FieldsetWrapper = styled("div", {
@@ -48,27 +67,25 @@ const FieldsetWrapper = styled("div", {
   border: "none",
 });
 
-export const Input = ({ label, placeholder_text, width, maxWidth }) => {
+export const Input = ({ label, placeholder_text, width, maxWidth, type }) => {
   return (
-    <>
-      <FieldsetWrapper
-        css={{
-          width: width,
-          maxWidth: maxWidth,
-        }}
-      >
-        <Fieldset>
-          <div className="input-wrapper first">
-            <p className="helper-label">{label}</p>
-            <input
-              id="application-name"
-              type="text"
-              maxLength="48"
-              placeholder={placeholder_text}
-            />
-          </div>
-        </Fieldset>
-      </FieldsetWrapper>
-    </>
+    <FieldsetWrapper
+      css={{
+        width: width,
+        maxWidth: maxWidth,
+      }}
+    >
+      <Fieldset type={type}>
+        <div className="input-wrapper first">
+          <p className="helper-label">{label}</p>
+          <input
+            id="application-name"
+            type="text"
+            maxLength="48"
+            placeholder={placeholder_text}
+          />
+        </div>
+      </Fieldset>
+    </FieldsetWrapper>
   );
 };
