@@ -20,7 +20,11 @@ const Home = () => {
   return (
     <Layout page_name="Home">
       <div className={css.main_container}>
-        <HeroImage className={css.placeholder} src="/image/header.png">
+        <HeroImage
+          className={css.placeholder}
+          src="/image/header.png"
+          alt="API banner"
+        >
           <div className={classNames(css.hero_container, css.content)}>
             <Text as="h1" type="heading1" css={{ mb: "16px" }}>
               Deriv API
