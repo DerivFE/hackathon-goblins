@@ -85,7 +85,12 @@ const SchemaBlock = ({ schema, isNested }) => {
         >
           {Object.keys(properties).map((property) => {
             const details = properties[property];
-            const { type, description, properties: subProperties } = details;
+            const {
+              enum: enumProp = [],
+              type,
+              description,
+              properties: subProperties,
+            } = details;
 
             const hasSubProperties = !!subProperties;
 
@@ -118,6 +123,9 @@ const SchemaBlock = ({ schema, isNested }) => {
                       ) : (
                         <Tag hasNoBackground>{type}</Tag>
                       )}
+                      {enumProp.map((item) => (
+                        <Tag key={item}>{item}</Tag>
+                      ))}
                     </Box>
                   </Box>
                   <Text
