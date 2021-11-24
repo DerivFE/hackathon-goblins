@@ -126,8 +126,8 @@ const SchemaBlock = ({ schema, isNested }) => {
   const { title, description, auth_required, auth_scopes, properties } = schema;
 
   const memoizedSchema = React.useMemo(() => {
-    return JSON.stringify(properties, null, 2);
-  }, [properties]);
+    return JSON.stringify(schema, null, 2);
+  }, [schema]);
 
   const nestedHeadStyle = {
     backgroundColor: "rgba(37,37,37,.72)",
@@ -200,7 +200,6 @@ const SchemaBlock = ({ schema, isNested }) => {
           className={css.schema_block_properties}
           style={{
             background: isNested ? "rgba(37,37,37,.4)" : undefined,
-            overflow: "auto",
           }}
         >
           <ToggleIcons
@@ -210,7 +209,9 @@ const SchemaBlock = ({ schema, isNested }) => {
             toggleSchema={toggleSchema}
           ></ToggleIcons>
           {isSchemaShown ? (
-            <Highlight>{memoizedSchema}</Highlight>
+            <pre style={{ overflow: "auto" }} className={css.json_schema}>
+              {memoizedSchema}
+            </pre>
           ) : (
             Object.keys(properties).map((property) => (
               <SchemaPropertiesBlock

@@ -43,3 +43,9 @@
   font-size: 12px;
   color: #a9a9a9;
 }
+
+.json_schema {
+  color: #ffcd44;
+  line-height: 18px;
+  padding: 0px 20px;
+}
