@@ -29,7 +29,7 @@ const Checkmark = styled("span", {
 });
 
 const ContentWrapper = styled("div", {
-  margin: "auto 16px",
+  marginLeft: "16px",
 });
 
 const OvalWrapper = styled("div", {
@@ -39,17 +39,14 @@ const OvalWrapper = styled("div", {
   backgroundColor: "$coral",
   borderRadius: "50%",
   textAlign: "center",
-  paddingLeft: "1px",
-  margin: "17px 0 auto 16px",
 });
 
 const FlexWrapper = styled("div", {
-  display: "flex",
-  position: "relative",
   borderRadius: "4px",
   boxShadow: "0 4px 8px 0 rgba(14, 14, 14, 0.1)",
-  minHeight: "80px",
+  height: "80px",
   marginBottom: "16px",
+  backgroundColor: "white",
 
   "&:last-child": {
     marginBottom: "0px",

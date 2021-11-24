@@ -1,6 +1,6 @@
 .container {
   position: fixed;
-  z-index: 999;
+  z-index: 5;
   width: 100%;
   top: 32px;
   display: flex;
@@ -20,7 +20,12 @@
 .sub > .deriv_logo {
   width: 183px;
 }
-
+.sub > .branding_text {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 400;
+  margin-left: 24px;
+}
 .sub > .hamburger_icon {
   display: none;
 }
@@ -30,6 +35,7 @@
   margin-left: 5%;
   margin-right: auto;
   color: #fff;
+  align-items: center;
 }
 
 .link_container > a {
@@ -59,10 +65,10 @@
   visibility: visible;
 }
 
-.sub > .branding_text {
-  font-size: 24px;
-  font-weight: 400;
-  margin-left: 24px;
+@media (min-width: 768px) and (max-width: 780px) {
+  .link_container > a:not(:last-child) {
+    margin-right: 20px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -72,7 +78,7 @@
   }
 
   .container > .sub {
-    width: 90%;
+    width: 96%;
   }
 
   .sub > .deriv_logo {
@@ -85,6 +91,7 @@
   }
 
   .sub > .hamburger_icon {
+    width: 16px;
     display: block;
     margin-right: 12px;
   }
@@ -96,5 +103,6 @@
   .sub > .branding_text {
     font-size: 16px;
     margin-left: 8px;
+    padding-top: 4px;
   }
 }

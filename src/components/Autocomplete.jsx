@@ -118,6 +118,7 @@ const Autocomplete = ({
       setValue(selectedLabel);
       onSelect?.({});
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLabel]);
 
   React.useEffect(() => {

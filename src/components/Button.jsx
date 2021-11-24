@@ -57,6 +57,12 @@ export const Button = styled("button", {
         color: "$text",
         boxShadow: "0 0 0 2px #999",
       },
+      outlined2: {
+        backgroundColor: "transparent",
+        color: "$fadedGrey",
+        border: "solid 1px",
+        padding: "6px 16px",
+      },
     },
   },
   defaultVariants: {

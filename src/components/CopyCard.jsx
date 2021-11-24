@@ -12,12 +12,20 @@ const CopyCardWrapper = styled("div", {
   flexWrap: "nowrap",
   alignItems: "center",
   mb: "8px",
+
+  "@tablet": {
+    width: "100%",
+  },
 });
 
 const CopyCardText = styled("text", {
   width: "100%",
   padding: "16px 24px",
   color: "$text",
+
+  "@tablet": {
+    wordBreak: "break-all",
+  },
 });
 
 const CopyButton = styled("div", {
@@ -28,6 +36,10 @@ const CopyButton = styled("div", {
   fontWeight: "400",
   cursor: "copy",
   borderLeft: "rgba(229,229,229,.4) 1px solid",
+
+  "@tablet": {
+    padding: "4px 8px",
+  },
 
   variants: {
     hover: {

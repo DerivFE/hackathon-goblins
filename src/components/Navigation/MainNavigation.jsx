@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import SideMenu from "components/navigation/SideMenu";
+import SideMenu from "components/Navigation/SideMenu";
 import css from "./MainNavigation.module.css";
 import CloseIcon from "assets/svg/close.svg";
 import HamburgerIcon from "assets/svg/hamburger.svg";

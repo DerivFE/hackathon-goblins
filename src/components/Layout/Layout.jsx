@@ -1,6 +1,6 @@
 import Head from "next/head";
-import TopNavigation from "components/navigation/TopNavigation";
-import MainNavigation from "components/navigation/MainNavigation";
+import TopNavigation from "components/Navigation/TopNavigation";
+import MainNavigation from "components/Navigation/MainNavigation";
 import css from "./Layout.module.css";
 
 const default_page_name = "Page";
