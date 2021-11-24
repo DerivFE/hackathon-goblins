@@ -1,8 +1,10 @@
 import React from "react";
 import Layout from "components/Layout/Layout";
 import { Box } from "components/Box";
-import DocWrapper from "components/tabs/DocWrapper";
 import Autocomplete from "components/Autocomplete";
+import css from "./Playground.module.css";
+import { Button } from "components/Button";
+import Highlight from "react-highlight";
 
 const apiCalls = [
   { name: "active_symbols", title: "Active Symbols" },
@@ -130,22 +132,106 @@ const apiCalls = [
   { name: "website_status", title: "Server Status" },
 ];
 
+const PlaygroundCalls = () => {};
+
 const Playground = () => {
-  const [selectedItem, setSelectedItem] = React.useState({});
+  const [selectedItem, setSelectedItem] = React.useState(null);
+  const [apiToken, setApiToken] = React.useState("");
 
   return (
-    <Layout>
+    <Layout className={css.layout}>
       <Box col>
-        <div style={{ display: "flex", width: "50%" }}>
-          <Autocomplete
-            getItemKey={(item) => item?.name || ""}
-            getItemValue={(item) => item?.title || ""}
-            items={apiCalls}
-            renderItem={(item) => <React.Fragment>{item.title}</React.Fragment>}
-            selectedItem={selectedItem}
-            onSelect={(item) => setSelectedItem(item)}
-          />
-        </div>
+        <h1 className={css.page_title}>API playground</h1>
+        <Box jc="center">
+          <Box style={{ width: "90%" }}>
+            <Box col>
+              <Box col>
+                <Autocomplete
+                  label={"API Calls"}
+                  getItemKey={(item) => item?.name || ""}
+                  getItemValue={(item) => item?.title || ""}
+                  items={apiCalls}
+                  renderItem={(item) => (
+                    <React.Fragment>{item.title}</React.Fragment>
+                  )}
+                  selectedItem={selectedItem}
+                  onSelect={(item) => setSelectedItem(item)}
+                />
+                <Box className={css.api_token_wrapper}>
+                  <Box className={css.api_token} ai="center">
+                    <input
+                      className={css.api_token_input}
+                      value={apiToken}
+                      onChange={(e) => setApiToken(e.target.value)}
+                      placeholder="API Token"
+                    />
+                    <Button
+                      style={{
+                        padding: "10px 16px",
+                        borderTopLeftRadius: 0,
+                        borderBottomLeftRadius: 0,
+                        fontSize: "14px",
+                      }}
+                      variant="primary"
+                    >
+                      Authenticate
+                    </Button>
+                  </Box>
+                  <Box col className={css.get_api_token} ai="center">
+                    <label
+                      style={{
+                        textAlign: "center",
+                        marginBottom: "16px",
+                        color: "#c2c2c2",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Looking for your API token?
+                    </label>
+                    <Button
+                      style={{
+                        fontSize: "14px",
+                        color: "white",
+                        border: "solid 2px #6e6e6e",
+                        boxShadow: "none",
+                      }}
+                      variant="secondary"
+                    >
+                      Get your API token
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
+              <Box className={css.request_wrapper} col>
+                <textarea className={css.request_input} />
+                <Box jc="center" className={css.request_input_wrapper}>
+                  <Button
+                    style={{
+                      fontSize: "14px",
+                      color: "white",
+                      marginRight: "8px",
+                      boxShadow: "none",
+                      border: "solid 2px #6e6e6e",
+                    }}
+                    variant="secondary"
+                  >
+                    Reset Connection
+                  </Button>
+                  <Button
+                    style={{ fontSize: "14px", color: "white" }}
+                    variant="primary"
+                  >
+                    Send Request
+                  </Button>
+                </Box>
+              </Box>
+              <Box col>
+                <Highlight></Highlight>
+              </Box>
+            </Box>
+            <Box col></Box>
+          </Box>
+        </Box>
       </Box>
     </Layout>
   );
