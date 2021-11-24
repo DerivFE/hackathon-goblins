@@ -21,8 +21,13 @@ const DocumentationSelector = () => {
   };
 
   const StyledSelect = styled(Select, {
-    marginBottom: '1rem',
+    marginBottom: "1rem",
     height: 40,
+    display: "none",
+
+    "@tabletL": {
+      display: "block",
+    },
   });
 
   return (
