@@ -6,6 +6,7 @@ import {
   TabsTrigger,
   TabsContent,
 } from "components/tabs/CustomTabs";
+import DocumentationSelector from "components/DocumentationSelector";
 import { styled } from "stitches.config";
 
 const StyledListWrapper = styled("div", {
@@ -76,7 +77,10 @@ const DocWrapper = ({ children, value, ...props }) => {
             </TabsTrigger>
           </StyledListWrapper>
         </TabsList>
-        <TabsContent value={value}>{children}</TabsContent>
+        <TabsContent value={value}>
+          <DocumentationSelector css={{ "@tabletL": { display: "block" } }} />
+          {children}
+        </TabsContent>
       </Tabs>
     </StyledDiv>
   );
