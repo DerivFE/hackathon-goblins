@@ -1,10 +1,13 @@
 import React from "react";
+import Highlight from "react-highlight";
 import Layout from "components/Layout/Layout";
 import { Box } from "components/Box";
 import Autocomplete from "components/Autocomplete";
 import css from "./Playground.module.css";
 import { Button } from "components/Button";
-import Highlight from "react-highlight";
+import socket_base from "src/common/socket_base";
+import { getJsonPaths } from "./helper";
+import SchemaBlock from "./schema-block";
 
 const apiCalls = [
   { name: "active_symbols", title: "Active Symbols" },
@@ -132,11 +135,70 @@ const apiCalls = [
   { name: "website_status", title: "Server Status" },
 ];
 
-const PlaygroundCalls = () => {};
+const PlaygroundCalls = ({ apiMessages }) => {
+  return (
+    <Box col className={css.playground_calls}>
+      {apiMessages.map((message, index) => (
+        <Box key={index} className={css.code_block_wrapper}>
+          <Box className={css.code_block}>
+            <Highlight>{message}</Highlight>
+          </Box>
+        </Box>
+      ))}
+    </Box>
+  );
+};
 
 const Playground = () => {
   const [selectedItem, setSelectedItem] = React.useState(null);
   const [apiToken, setApiToken] = React.useState("");
+  const [request, setRequest] = React.useState("");
+  const [deriv_api, setDerivApi] = React.useState();
+  const [apiMessages, setApiMessages] = React.useState([]);
+  const [requestSchema, setRequestSchema] = React.useState("");
+  const [responseSchema, setResponseSchema] = React.useState("");
+
+  React.useEffect(() => {
+    setDerivApi(socket_base.get());
+  }, []);
+
+  const isRequestValid = () => {
+    try {
+      JSON.parse(request);
+      return true;
+    } catch (e) {
+      window.alert("Invalid JSON");
+    }
+    return false;
+  };
+
+  const pushToApiMessages = (message) => {
+    apiMessages.push(message);
+    setApiMessages([...apiMessages]);
+  };
+
+  const sendRequest = () => {
+    if (isRequestValid()) {
+      const request_obj = JSON.parse(request);
+      deriv_api.send(request_obj).then((response) => {
+        pushToApiMessages(JSON.stringify(response, null, 2));
+      });
+      pushToApiMessages(JSON.stringify(request_obj, null, 2));
+    }
+  };
+
+  const onSelectAPI = async (item) => {
+    setSelectedItem(item);
+    if (item?.name) {
+      const paths = getJsonPaths(item?.name);
+      const example = await fetch(paths.example);
+      setRequest(JSON.stringify(await example.json(), null, 2));
+      const send = await fetch(paths.send);
+      setRequestSchema(await send.json());
+      const receive = await fetch(paths.receive);
+      setResponseSchema(await receive.json());
+    }
+  };
 
   return (
     <Layout className={css.layout}>
@@ -155,7 +217,7 @@ const Playground = () => {
                     <React.Fragment>{item.title}</React.Fragment>
                   )}
                   selectedItem={selectedItem}
-                  onSelect={(item) => setSelectedItem(item)}
+                  onSelect={onSelectAPI}
                 />
                 <Box className={css.api_token_wrapper}>
                   <Box className={css.api_token} ai="center">
@@ -203,7 +265,11 @@ const Playground = () => {
                 </Box>
               </Box>
               <Box className={css.request_wrapper} col>
-                <textarea className={css.request_input} />
+                <textarea
+                  className={css.request_input}
+                  value={request}
+                  onChange={(e) => setRequest(e.target.value)}
+                />
                 <Box jc="center" className={css.request_input_wrapper}>
                   <Button
                     style={{
@@ -220,16 +286,20 @@ const Playground = () => {
                   <Button
                     style={{ fontSize: "14px", color: "white" }}
                     variant="primary"
+                    onClick={sendRequest}
                   >
                     Send Request
                   </Button>
                 </Box>
               </Box>
               <Box col>
-                <Highlight></Highlight>
+                <PlaygroundCalls apiMessages={apiMessages} />
               </Box>
             </Box>
-            <Box col></Box>
+            <Box col className={css.schema_blocks}>
+              {requestSchema && <SchemaBlock schema={requestSchema} />}
+              {responseSchema && <SchemaBlock schema={responseSchema} />}
+            </Box>
           </Box>
         </Box>
       </Box>

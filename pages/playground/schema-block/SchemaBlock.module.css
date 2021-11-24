@@ -1,0 +1,27 @@
+.schema_block {
+  background-color: #151717;
+  margin-bottom: 24px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.schema_block_head {
+  background-color: hsl(0, 0%, 15%);
+  padding: 24px;
+}
+
+.schema_block_properties {
+  padding: 12px 0;
+}
+
+.schema_block_property {
+  padding: 12px 24px;
+}
+
+.tag {
+  margin: 0 0 0 8px;
+  padding: 6px;
+  border-radius: 4px;
+  color: #85acb0;
+  font-size: 14px;
+}

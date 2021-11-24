@@ -56,3 +56,20 @@
 
 .request_input_wrapper {
 }
+
+.code_block_wrapper {
+  padding: 8px 24px 0;
+}
+.code_block {
+  background-color: #0e0e0e;
+  border-radius: 4px;
+}
+
+.playground_calls {
+  background-color: #151717;
+  padding-bottom: 8px;
+}
+
+.schema_blocks {
+  margin-left: 24px;
+}
