@@ -7,6 +7,7 @@ import {
   CollapsibleTrigger,
 } from "components/Collapsible";
 import css from "./SchemaBlock.module.css";
+import Highlight from "react-highlight";
 
 const Tag = ({ children, style = {}, hasNoBackground, isToggable }) => {
   const commonStyle = {
@@ -124,6 +125,10 @@ const SchemaBlock = ({ schema, isNested }) => {
 
   const { title, description, auth_required, auth_scopes, properties } = schema;
 
+  const memoizedSchema = React.useMemo(() => {
+    return JSON.stringify(properties, null, 2);
+  }, [properties]);
+
   const nestedHeadStyle = {
     backgroundColor: "rgba(37,37,37,.72)",
     padding: "12px 24px",
@@ -195,6 +200,7 @@ const SchemaBlock = ({ schema, isNested }) => {
           className={css.schema_block_properties}
           style={{
             background: isNested ? "rgba(37,37,37,.4)" : undefined,
+            overflow: "auto",
           }}
         >
           <ToggleIcons
@@ -203,14 +209,18 @@ const SchemaBlock = ({ schema, isNested }) => {
             toggleCollapse={toggleCollapse}
             toggleSchema={toggleSchema}
           ></ToggleIcons>
-          {Object.keys(properties).map((property) => (
-            <SchemaPropertiesBlock
-              key={property}
-              properties={properties}
-              property={property}
-              isAllExpanded={isAllExpanded}
-            />
-          ))}
+          {isSchemaShown ? (
+            <Highlight>{memoizedSchema}</Highlight>
+          ) : (
+            Object.keys(properties).map((property) => (
+              <SchemaPropertiesBlock
+                key={property}
+                properties={properties}
+                property={property}
+                isAllExpanded={isAllExpanded}
+              />
+            ))
+          )}
         </Box>
       )}
     </Box>

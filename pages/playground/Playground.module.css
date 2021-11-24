@@ -70,6 +70,12 @@
   padding-bottom: 8px;
 }
 
+.request_block {
+  flex: 1;
+}
+
 .schema_blocks {
   margin-left: 24px;
+  flex: 1;
+  overflow: auto;
 }

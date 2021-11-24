@@ -206,7 +206,7 @@ const Playground = () => {
         <h1 className={css.page_title}>API playground</h1>
         <Box jc="center">
           <Box style={{ width: "90%" }}>
-            <Box col>
+            <Box col className={css.request_block}>
               <Box col>
                 <Autocomplete
                   label={"API Calls"}
