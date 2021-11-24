@@ -246,7 +246,10 @@ const Home = () => {
           </div>
         </div>
         <div className={classNames(css.testimonials, css.fold)}>
-          <Carousel title="See what our clients say">
+          <Carousel
+            title="See what our clients say"
+            className={classNames(css.testimony_header)}
+          >
             <CarouselItem>
               <div className={css.testimony}>
                 <Text type="paragraph1" css={{ mb: "32px" }}>
