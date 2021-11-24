@@ -28,7 +28,31 @@ const Tag = ({ children, style = {}, hasNoBackground, isToggable }) => {
   );
 };
 
+const ToggleIcons = ({
+  isVisible,
+  isCollapsed,
+  toggleCollapse,
+  toggleSchema,
+}) => {
+  if (!isVisible) return null;
+
+  return (
+    <div className={css.toggle_icons}>
+      <div className={css.toggle_icon} onClick={toggleSchema}>
+        {"{}"}
+      </div>
+      <div className={css.toggle_icon} onClick={toggleCollapse}>
+        {isCollapsed ? "+" : "-"}
+      </div>
+    </div>
+  );
+};
+
 const SchemaBlock = ({ schema, isNested }) => {
+  const [isMouseOver, setIsMouseOver] = React.useState(false);
+  const [isAllCollapsed, setIsAllCollapsed] = React.useState(true);
+  const [isSchemaShown, setIsSchemaShown] = React.useState(false);
+
   const { title, description, auth_required, auth_scopes, properties } = schema;
 
   const nestedHeadStyle = {
@@ -37,8 +61,29 @@ const SchemaBlock = ({ schema, isNested }) => {
     marginTop: "8px",
   };
 
+  const onMouseEnter = () => {
+    setIsMouseOver(true);
+  };
+
+  const onMouseLeave = () => {
+    setIsMouseOver(false);
+  };
+
+  const toggleCollapse = () => {
+    setIsAllCollapsed(!isAllCollapsed);
+  };
+
+  const toggleSchema = () => {
+    setIsSchemaShown(isSchemaShown);
+  };
+
   return (
-    <Box col className={css.schema_block}>
+    <Box
+      col
+      className={css.schema_block}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <Box
         col
         className={css.schema_block_head}
@@ -83,8 +128,14 @@ const SchemaBlock = ({ schema, isNested }) => {
             background: isNested ? "rgba(37,37,37,.4)" : undefined,
           }}
         >
+          <ToggleIcons
+            isVisible={isMouseOver}
+            isCollapsed={isAllCollapsed}
+            toggleCollapse={toggleCollapse}
+            toggleSchema={toggleSchema}
+          ></ToggleIcons>
           {Object.keys(properties).map((property) => {
-            const details = properties[property];
+            const details = properties[property] || {};
             const {
               enum: enumProp = [],
               type,
