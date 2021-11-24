@@ -76,6 +76,7 @@ export const Input = React.forwardRef(function Input(props, ref) {
     type,
     defaultValue,
     onChange,
+    value,
     formFieldProps,
   } = props;
   return (
@@ -88,15 +89,30 @@ export const Input = React.forwardRef(function Input(props, ref) {
       <Fieldset type={type}>
         <div className="input-wrapper first">
           <p className="helper-label">{label}</p>
-          <input
-            ref={ref}
-            id="application-name"
-            type="text"
-            maxLength="48"
-            placeholder={placeholder_text}
-            defaultValue={defaultValue}
-            {...formFieldProps}
-          />
+          {value ? (
+            <input
+              ref={ref}
+              id="application-name"
+              type="text"
+              maxLength="48"
+              placeholder={placeholder_text}
+              defaultValue={defaultValue}
+              value={value}
+              onChange={onChange}
+            />
+          ) : (
+            <input
+              ref={ref}
+              id="application-name"
+              type="text"
+              maxLength="48"
+              placeholder={placeholder_text}
+              defaultValue={defaultValue}
+              value={value}
+              onChange={onChange}
+              {...formFieldProps}
+            />
+          )}
         </div>
       </Fieldset>
     </FieldsetWrapper>

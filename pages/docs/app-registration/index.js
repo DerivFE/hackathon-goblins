@@ -54,6 +54,8 @@ const inputFields = [
   },
 ];
 
+const app_id = 1089;
+
 const AppRegistration = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -68,13 +70,38 @@ const AppRegistration = () => {
     },
   });
 
+  const [authToken, setAuthToken] = React.useState("");
+
   const itemsRef = React.useRef([]);
+  const ws = React.useRef(null);
 
   React.useEffect(() => {
     itemsRef.current = itemsRef.current.slice(0, inputFields.length);
   }, []);
 
+  React.useEffect(() => {
+    ws.current = new WebSocket(
+      "wss://ws.binaryws.com/websockets/v3?app_id=" + app_id
+    );
+    ws.current.onopen = () => console.log("ws opened");
+    ws.current.onclose = () => console.log("ws closed");
+
+    ws.current.onmessage = (e) => handleMessage(e);
+
+    return () => {
+      ws.current.close();
+    };
+  }, []);
+
+  const handleAuth = (e) => {
+    ws.current.send(JSON.stringify({ authorize: authToken || "" }));
+  };
+
   const onSubmit = (data) => console.log(data);
+
+  const handleMessage = (e) => {
+    console.log(e.data);
+  };
 
   return (
     <Layout>
@@ -87,15 +114,27 @@ const AppRegistration = () => {
             </h3>
             <div className={css.cta}>
               <h3>Looking for your API token?</h3>
-              <div className={css.cta_button}>Get your API token</div>
+              <div
+                className={css.cta_button}
+                onClick={() =>
+                  (window.location.href =
+                    "https://app.deriv.com/account/api-token")
+                }
+              >
+                Get your API token
+              </div>
             </div>
             <div className={css.api_token_wrapper}>
               <Input
                 label="API Token"
                 placeholder_text="Api Token"
                 maxWidth="600px"
+                value={authToken}
+                onChange={(e) => setAuthToken(e.target.value)}
               />
-              <Button variant="primary">Authenticate</Button>
+              <Button variant="primary" onClick={handleAuth}>
+                Authenticate
+              </Button>
             </div>
             <div className={css.horizontal_separator}></div>
             <div className={css.main_form}>
@@ -110,16 +149,6 @@ const AppRegistration = () => {
                       render={({ field }) => (
                         <Input
                           formFieldProps={field}
-                          // defaultValue=""
-                          // formRegistration={{
-                          //   ...register(field.name, {
-                          //     required:
-                          //       field.name === "name" || field.name === "redirectURL"
-                          //         ? true
-                          //         : false,
-                          //   }),
-                          // }}
-                          // name={field.name}
                           ref={(el) => (itemsRef.current[index] = el)}
                           label={inputField.label}
                           placeholder_text={inputField.placeholder_text}
@@ -146,6 +175,26 @@ const AppRegistration = () => {
                 </div>
               </form>
             </div>
+            {/* <div class="table-wrapper">
+              <table
+                class="flex-table"
+                id="applications-table"
+                style="display: none"
+              >
+                <thead>
+                  <tr class="flex-tr">
+                    <th class="flex-tr-child name">Name</th>
+                    <th class="flex-tr-child app_id">Application ID</th>
+                    <th class="flex-tr-child scopes">Scopes</th>
+                    <th class="flex-tr-child redirect_url">Redirect URL</th>
+                    <th colspan="2" class="flex-tr-child actions">
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div> */}
             <div className={css.horizontal_separator}></div>
             <div className={css.request_json}>
               <h3>Request JSON</h3>
