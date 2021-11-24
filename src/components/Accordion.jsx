@@ -51,6 +51,11 @@ const StyledTrigger = styled(AccordionPrimitive.Trigger, {
   fontWeight: "bold",
   lineHeight: 1,
   color: "black",
+
+  "@tablet": {
+    padding: "24px 16px",
+    height: "auto",
+  },
 });
 
 const StyledContent = styled(AccordionPrimitive.Content, {
@@ -74,10 +79,30 @@ const StyledContentText = styled("div", {
 
 const StyledPlusIcon = styled(PlusIcon, {
   "[data-state=open] &": { display: "none" },
+
+  "@tablet": {
+    width: "24px",
+    height: "24px",
+    marginLeft: "24px",
+  },
 });
 const StyledMinusIcon = styled(MinusIcon, {
   display: "none",
   "[data-state=open] &": { display: "block" },
+
+  "@tablet": {
+    width: "24px",
+    height: "24px",
+    marginLeft: "24px",
+  },
+});
+
+const StyledText = styled("div", {
+  "@tablet": {
+    width: "fit-content",
+    fontSize: "16px",
+    lineHeight: "24px",
+  },
 });
 
 // Exports
@@ -87,7 +112,7 @@ export const AccordionTrigger = React.forwardRef(
   ({ children, ...props }, forwardedRef) => (
     <StyledHeader>
       <StyledTrigger {...props} ref={forwardedRef}>
-        {children}
+        <StyledText>{children}</StyledText>
         <StyledPlusIcon aria-hidden />
         <StyledMinusIcon aria-hidden />
       </StyledTrigger>
