@@ -29,6 +29,7 @@
   height: 100%;
   color: white;
   z-index: 2;
+  max-width: 792px;
 }
 
 .hero_header {
@@ -210,4 +211,207 @@
 
 .main_container > .footer > .inner_container {
   justify-content: flex-start;
+}
+
+.styled_small_header_text {
+  text-align: center;
+}
+
+.benefit_grid_mobile {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .hero_container {
+    max-width: 520px;
+  }
+  .styled_header_text {
+    font-size: 40px;
+    line-height: 50px;
+    margin-bottom: 8px;
+  }
+  .styled_small_header_text {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .fold {
+    padding: 40px 0;
+  }
+  .benefit_styled_header {
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+    max-width: 328px;
+    margin-bottom: 24px;
+  }
+  .benefit_icon_container {
+    width: 100%;
+    margin-bottom: 40px;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .benefit_icon_container > .item_container {
+    display: flex;
+    margin-bottom: 24px;
+  }
+  .benefit_icon_container > .item_container:last-child {
+    margin-bottom: 0;
+  }
+
+  /* benefit sections */
+  .benefit_grid {
+    display: none;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 260px 260px;
+    grid-gap: 80px 24px;
+  }
+  .benefit_grid_mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .benefit_grid_mobile > .item_container {
+    max-width: 500px;
+    margin: 0 auto 24px;
+    padding: 0 16px;
+  }
+  .benefit_grid_mobile > .item_container:nth-child(2) {
+    margin: 0 auto 40px;
+  }
+
+  /* earn container */
+  .earn_container {
+    margin: 0 auto;
+  }
+  .earn_container > .inner_container {
+    width: 100%;
+    flex-direction: column;
+    padding: 0 24px;
+    max-width: 480px;
+    max-width: 550px;
+  }
+  .earn_container > .inner_container > .text_container {
+    width: 100%;
+  }
+  .earn_container > .inner_container > .check_container {
+    width: 100%;
+  }
+  .earn_container_header {
+    font-size: 32px;
+    line-height: 40px;
+    margin-bottom: 24px;
+  }
+
+  /* steps */
+  .step_container {
+    width: 100%;
+    max-width: 328px;
+  }
+  .step_container > .inner_container {
+    width: 100%;
+    padding: 16px;
+  }
+  .step_container > .inner_container > .steps {
+    width: 100%;
+    flex-direction: column;
+  }
+  .steps > .card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-right: unset;
+    margin-bottom: 16px;
+    max-width: fit-content;
+    padding: 16px;
+  }
+  .steps > .card > .header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .steps_small_desc {
+    text-align: center;
+  }
+
+  /* testimonial */
+  .testimonials {
+    width: 100%;
+    max-width: 440px;
+  }
+  .testimony {
+    max-width: 85%;
+  }
+  .testimony_header {
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+  }
+  /* community */
+  .community > .inner_container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .community > .inner_container > .section {
+    max-width: fit-content;
+    margin: 0 auto;
+    padding: 0 16px;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+  .community > .inner_container > .section:last-child {
+    margin-bottom: 0;
+  }
+  .community_header {
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .community_small_header {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .community_join_btn {
+    padding: 14px 16px !important;
+  }
+
+  /* library */
+  .library {
+    max-width: 100%;
+  }
+  .library_text_mw {
+    max-width: 328px;
+  }
+  .library_header {
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .library_small_header {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    margin-bottom: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero_container {
+    max-width: 328px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
 }

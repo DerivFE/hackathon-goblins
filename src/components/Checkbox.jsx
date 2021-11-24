@@ -51,6 +51,10 @@ const FlexWrapper = styled("div", {
   "&:last-child": {
     marginBottom: "0px",
   },
+
+  "@tabletL": {
+    height: "auto",
+  },
 });
 
 const InnerWrapper = styled("div", {

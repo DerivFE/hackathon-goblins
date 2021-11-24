@@ -57,11 +57,19 @@ const Arrow = styled("span", {
     left: {
       true: {
         left: "-50px",
+        "@tablet": {
+          left: "0",
+          transform: "translate(0, -50%)",
+        },
       },
     },
     right: {
       true: {
         right: "-50px",
+        "@tablet": {
+          right: "0",
+          transform: "translate(0, -50%)",
+        },
       },
     },
   },
@@ -75,6 +83,13 @@ const Arrow = styled("span", {
 const Title = styled(Text, {
   textAlign: "center",
   marginBottom: "40px",
+
+  "@tablet": {
+    fontSize: "32px !important",
+    lineHeight: "40px !important",
+    textAlign: "center",
+    marginBottom: "16px !important",
+  },
 });
 
 export const Carousel = ({ children, title }) => {
