@@ -1,15 +1,26 @@
 import React from "react";
 import { Box } from "components/Box";
 import { Text } from "components/Text";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "components/Collapsible";
 import css from "./SchemaBlock.module.css";
 
 const Tag = ({ children, style = {}, hasNoBackground, isToggable }) => {
+  const commonStyle = {
+    color: isToggable ? undefined : "#85acb0",
+  };
+
   const localStyle = {
     ...style,
+    ...commonStyle,
     ...(hasNoBackground
       ? {}
       : { backgroundColor: "rgba(133, 172, 176, 0.16)" }),
   };
+
   return (
     <Text as="span" style={localStyle} className={css.tag}>
       {children}
@@ -79,30 +90,50 @@ const SchemaBlock = ({ schema, isNested }) => {
             const hasSubProperties = !!subProperties;
 
             return (
-              <Box col key={property} className={css.schema_block_property}>
-                <Box>
+              <Collapsible key={property}>
+                <Box col className={css.schema_block_property}>
+                  <Box style={{ marginBottom: "12px" }}>
+                    <Text
+                      as="span"
+                      type="paragraph1"
+                      style={{ fontWeight: "bold", flex: 1 }}
+                    >
+                      {property}
+                    </Text>
+                    <Box style={{ flex: 1 }}>
+                      {hasSubProperties ? (
+                        <CollapsibleTrigger
+                          style={{
+                            background: "#323738",
+                            borderRadius: "4px",
+                            border: "none",
+                            cursor: "pointer",
+                            color: "white",
+                          }}
+                        >
+                          <Tag hasNoBackground isToggable>
+                            {type}
+                          </Tag>
+                        </CollapsibleTrigger>
+                      ) : (
+                        <Tag hasNoBackground>{type}</Tag>
+                      )}
+                    </Box>
+                  </Box>
                   <Text
                     as="span"
-                    type="paragraph1"
-                    style={{ fontWeight: "bold", flex: 1 }}
+                    type="paragraph2"
+                    css={{ color: "$colors$textLight" }}
                   >
-                    {property}
+                    {description}
                   </Text>
-                  <Box style={{ flex: 1 }}>
-                    <Tag hasNoBackground isToggable={hasSubProperties}>
-                      {type}
-                    </Tag>
-                  </Box>
+                  {hasSubProperties && (
+                    <CollapsibleContent>
+                      <SchemaBlock schema={details} isNested />
+                    </CollapsibleContent>
+                  )}
                 </Box>
-                <Text
-                  as="span"
-                  type="paragraph2"
-                  css={{ color: "$colors$textLight" }}
-                >
-                  {description}
-                </Text>
-                {hasSubProperties && <SchemaBlock schema={details} isNested />}
-              </Box>
+              </Collapsible>
             );
           })}
         </Box>
