@@ -42,15 +42,84 @@ const ToggleIcons = ({
         {"{}"}
       </div>
       <div className={css.toggle_icon} onClick={toggleCollapse}>
-        {isCollapsed ? "+" : "-"}
+        {isCollapsed ? "-" : "+"}
       </div>
     </div>
   );
 };
 
+const SchemaPropertiesBlock = ({ properties, property, isAllExpanded }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsOpen(isAllExpanded);
+  }, [isAllExpanded]);
+
+  const details = properties[property] || {};
+  const {
+    enum: enumProp = [],
+    type,
+    description,
+    properties: subProperties,
+  } = details;
+
+  const hasSubProperties = !!subProperties;
+
+  const onClick = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <Collapsible key={property} open={isOpen}>
+      <Box col className={css.schema_block_property}>
+        <Box style={{ marginBottom: "12px" }}>
+          <Text
+            as="span"
+            type="paragraph1"
+            style={{ fontWeight: "bold", flex: 1 }}
+          >
+            {property}
+          </Text>
+          <Box style={{ flex: 1 }}>
+            {hasSubProperties ? (
+              <CollapsibleTrigger
+                style={{
+                  background: "#323738",
+                  borderRadius: "4px",
+                  border: "none",
+                  cursor: "pointer",
+                  color: "white",
+                }}
+                onClick={onClick}
+              >
+                <Tag hasNoBackground isToggable>
+                  {type}
+                </Tag>
+              </CollapsibleTrigger>
+            ) : (
+              <Tag hasNoBackground>{type}</Tag>
+            )}
+            {enumProp.map((item) => (
+              <Tag key={item}>{item}</Tag>
+            ))}
+          </Box>
+        </Box>
+        <Text as="span" type="paragraph2" css={{ color: "$colors$textLight" }}>
+          {description}
+        </Text>
+        {hasSubProperties && (
+          <CollapsibleContent>
+            <SchemaBlock schema={details} isNested />
+          </CollapsibleContent>
+        )}
+      </Box>
+    </Collapsible>
+  );
+};
+
 const SchemaBlock = ({ schema, isNested }) => {
   const [isMouseOver, setIsMouseOver] = React.useState(false);
-  const [isAllCollapsed, setIsAllCollapsed] = React.useState(true);
+  const [isAllExpanded, setIsAllExpanded] = React.useState(false);
   const [isSchemaShown, setIsSchemaShown] = React.useState(false);
 
   const { title, description, auth_required, auth_scopes, properties } = schema;
@@ -70,11 +139,11 @@ const SchemaBlock = ({ schema, isNested }) => {
   };
 
   const toggleCollapse = () => {
-    setIsAllCollapsed(!isAllCollapsed);
+    setIsAllExpanded(!isAllExpanded);
   };
 
   const toggleSchema = () => {
-    setIsSchemaShown(isSchemaShown);
+    setIsSchemaShown(!isSchemaShown);
   };
 
   return (
@@ -130,71 +199,18 @@ const SchemaBlock = ({ schema, isNested }) => {
         >
           <ToggleIcons
             isVisible={isMouseOver}
-            isCollapsed={isAllCollapsed}
+            isCollapsed={isAllExpanded}
             toggleCollapse={toggleCollapse}
             toggleSchema={toggleSchema}
           ></ToggleIcons>
-          {Object.keys(properties).map((property) => {
-            const details = properties[property] || {};
-            const {
-              enum: enumProp = [],
-              type,
-              description,
-              properties: subProperties,
-            } = details;
-
-            const hasSubProperties = !!subProperties;
-
-            return (
-              <Collapsible key={property}>
-                <Box col className={css.schema_block_property}>
-                  <Box style={{ marginBottom: "12px" }}>
-                    <Text
-                      as="span"
-                      type="paragraph1"
-                      style={{ fontWeight: "bold", flex: 1 }}
-                    >
-                      {property}
-                    </Text>
-                    <Box style={{ flex: 1 }}>
-                      {hasSubProperties ? (
-                        <CollapsibleTrigger
-                          style={{
-                            background: "#323738",
-                            borderRadius: "4px",
-                            border: "none",
-                            cursor: "pointer",
-                            color: "white",
-                          }}
-                        >
-                          <Tag hasNoBackground isToggable>
-                            {type}
-                          </Tag>
-                        </CollapsibleTrigger>
-                      ) : (
-                        <Tag hasNoBackground>{type}</Tag>
-                      )}
-                      {enumProp.map((item) => (
-                        <Tag key={item}>{item}</Tag>
-                      ))}
-                    </Box>
-                  </Box>
-                  <Text
-                    as="span"
-                    type="paragraph2"
-                    css={{ color: "$colors$textLight" }}
-                  >
-                    {description}
-                  </Text>
-                  {hasSubProperties && (
-                    <CollapsibleContent>
-                      <SchemaBlock schema={details} isNested />
-                    </CollapsibleContent>
-                  )}
-                </Box>
-              </Collapsible>
-            );
-          })}
+          {Object.keys(properties).map((property) => (
+            <SchemaPropertiesBlock
+              key={property}
+              properties={properties}
+              property={property}
+              isAllExpanded={isAllExpanded}
+            />
+          ))}
         </Box>
       )}
     </Box>
