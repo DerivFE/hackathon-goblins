@@ -124,6 +124,7 @@ const Autocomplete = ({
     if (selectedLabel) {
       setValue(selectedLabel);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLabel]);
 
   React.useEffect(() => {

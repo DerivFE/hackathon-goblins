@@ -80,7 +80,11 @@ TabsTrigger.displayName = "TabsTrigger";
 
 export const TabsContent = React.forwardRef(
   ({ children, ...props }, forwardedRef) => (
-    <StyledContent {...props} ref={forwardedRef}>{children}</StyledContent>
+    <StyledContent {...props} ref={forwardedRef} css={{ '@tabletL': { 
+      border: 'none',
+      width: '100%',
+      padding: 0,
+    }}}>{children}</StyledContent>
   )
 );
 TabsContent.displayName = "TabsContent";
