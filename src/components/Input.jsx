@@ -67,7 +67,17 @@ const FieldsetWrapper = styled("div", {
   border: "none",
 });
 
-export const Input = ({ label, placeholder_text, width, maxWidth, type }) => {
+export const Input = React.forwardRef(function Input(props, ref) {
+  const {
+    label,
+    placeholder_text,
+    width,
+    maxWidth,
+    type,
+    defaultValue,
+    onChange,
+    formFieldProps,
+  } = props;
   return (
     <FieldsetWrapper
       css={{
@@ -79,13 +89,16 @@ export const Input = ({ label, placeholder_text, width, maxWidth, type }) => {
         <div className="input-wrapper first">
           <p className="helper-label">{label}</p>
           <input
+            ref={ref}
             id="application-name"
             type="text"
             maxLength="48"
             placeholder={placeholder_text}
+            defaultValue={defaultValue}
+            {...formFieldProps}
           />
         </div>
       </Fieldset>
     </FieldsetWrapper>
   );
-};
+});
