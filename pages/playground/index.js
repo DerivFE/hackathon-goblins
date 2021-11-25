@@ -164,7 +164,7 @@ const apiCalls = [
   { name: "website_status", title: "Server Status" },
 ];
 
-const PlaygroundCalls = ({ apiMessages }) => {
+export const PlaygroundCalls = ({ apiMessages }) => {
   return (
     <Box col className={css.playground_calls}>
       {apiMessages.map((message, index) => (

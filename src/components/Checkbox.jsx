@@ -51,31 +51,37 @@ const FlexWrapper = styled("div", {
   "&:last-child": {
     marginBottom: "0px",
   },
-
-  "@tabletL": {
-    height: "auto",
-  },
 });
 
-const InnerWrapper = styled("div", {
-  display: "flex",
-  position: "relative",
-  padding: "16px 16px 16px 17px",
+const SimpleCheckbox = styled("div", {
+  margin: "20px 10px",
+
+  "& input[type='checkbox']": {
+    marginRight: "16px",
+    transform: "scale(1.23)",
+    padding: "9px",
+  },
 });
 
 export const CheckboxItem = ({ children }) => {
   return (
     <FlexWrapper>
-      <InnerWrapper>
-        <OvalWrapper>
-          <Checkmark />
-        </OvalWrapper>
-        <ContentWrapper>{children}</ContentWrapper>
-      </InnerWrapper>
+      <OvalWrapper>
+        <Checkmark />
+      </OvalWrapper>
+      <ContentWrapper>{children}</ContentWrapper>
     </FlexWrapper>
   );
 };
 
-export const Checkbox = ({ children }) => {
-  return <>{children}</>;
-};
+export const Checkbox = React.forwardRef(function Checkbox(
+  { children, formFields },
+  ref
+) {
+  return (
+    <SimpleCheckbox>
+      <input ref={ref} type="checkbox" {...formFields} />
+      <label>{children}</label>
+    </SimpleCheckbox>
+  );
+});
