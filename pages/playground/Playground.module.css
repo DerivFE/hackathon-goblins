@@ -55,6 +55,7 @@
   margin-bottom: 25px;
   padding: 10px;
   outline: 0;
+  box-sizing: border-box;
 }
 
 .request_input_wrapper {
@@ -66,11 +67,12 @@
 .code_block {
   background-color: #0e0e0e;
   border-radius: 4px;
+  overflow: auto;
 }
 
 .playground_calls {
-  overflow: auto;
   max-height: 60vh;
+  overflow: auto;
 }
 
 .playground_calls_wrapper {

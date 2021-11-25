@@ -210,9 +210,14 @@ const Playground = () => {
   const sendRequest = () => {
     if (isRequestValid()) {
       const request_obj = JSON.parse(request);
-      deriv_api.send(request_obj).then((response) => {
-        pushToApiMessages(JSON.stringify(response, null, 2));
-      });
+      deriv_api.send(request_obj).then(
+        (response) => {
+          pushToApiMessages(JSON.stringify(response, null, 2));
+        },
+        (error) => {
+          pushToApiMessages(JSON.stringify(error, null, 2));
+        }
+      );
       pushToApiMessages(JSON.stringify(request_obj, null, 2));
     }
   };
@@ -246,7 +251,7 @@ const Playground = () => {
       <Box col>
         <h1 className={css.page_title}>API playground</h1>
         <Box jc="center">
-          <Box style={{ width: "90%" }}>
+          <Box col={{ "@tabletL": true }} style={{ width: "90%" }}>
             <Box col className={css.request_block}>
               <Box col>
                 <Autocomplete
@@ -260,8 +265,20 @@ const Playground = () => {
                   selectedItem={selectedItem}
                   onSelect={onSelectAPI}
                 />
-                <Box className={css.api_token_wrapper}>
-                  <Box className={css.api_token} ai="center">
+                <Box
+                  col={{ "@tabletS": true }}
+                  className={css.api_token_wrapper}
+                >
+                  <Box
+                    className={css.api_token}
+                    ai="center"
+                    css={{
+                      "@tabletS": {
+                        borderRight: "0px!important",
+                        paddingTop: "20px",
+                      },
+                    }}
+                  >
                     <input
                       className={css.api_token_input}
                       value={apiToken}
@@ -281,7 +298,19 @@ const Playground = () => {
                       Authenticate
                     </Button>
                   </Box>
-                  <Box col className={css.get_api_token} ai="center">
+                  <Box
+                    col
+                    css={{
+                      "@tabletS": {
+                        order: -1,
+                        paddingBottom: "20px",
+                        paddingLeft: "0px!important",
+                        borderBottom: "1px solid #252525",
+                      },
+                    }}
+                    className={css.get_api_token}
+                    ai="center"
+                  >
                     <label
                       style={{
                         textAlign: "center",
@@ -345,7 +374,11 @@ const Playground = () => {
                 <PlaygroundCalls apiMessages={apiMessages} />
               </Box>
             </Box>
-            <Box col className={css.schema_blocks}>
+            <Box
+              col
+              className={css.schema_blocks}
+              css={{ "@tabletL": { marginLeft: "0px!important" } }}
+            >
               {requestSchema && <SchemaBlock schema={requestSchema} />}
               {responseSchema && <SchemaBlock schema={responseSchema} />}
             </Box>
