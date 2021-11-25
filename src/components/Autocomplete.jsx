@@ -106,6 +106,7 @@ const Autocomplete = ({
   const [dropdownPosition, setDropdownPosition] = React.useState({});
   const inputRef = React.useRef();
   const menuRef = React.useRef();
+  const selectedLabel = getItemValue(selectedItem);
   const [value, setValue] = React.useState("");
 
   const ignoreBlur = React.useRef(false);
@@ -113,7 +114,11 @@ const Autocomplete = ({
   const scrollOffset = React.useRef(null);
   const scrollTimerRef = React.useRef(null);
 
-  const selectedLabel = getItemValue(selectedItem);
+  React.useEffect(() => {
+    if (selectedItem) {
+      onSelect(selectedItem);
+    }
+  }, []);
 
   React.useEffect(() => {
     return () => {
@@ -129,7 +134,7 @@ const Autocomplete = ({
   }, [selectedLabel]);
 
   React.useEffect(() => {
-    if (value !== getItemValue(selectedItem)) {
+    if (value !== "" && value !== getItemValue(selectedItem)) {
       onSelect?.(null);
     }
   }, [value]);
@@ -143,7 +148,9 @@ const Autocomplete = ({
     const maybeScrollItemIntoView = () => {
       const index = getSelectedItemIndex();
 
-      menuRef.current.scrollTop = Math.max(index * 40 - 80, 0);
+      setTimeout(() => {
+        menuRef.current.scrollTop = Math.max(index * 40 - 80, 0);
+      });
       setHighlightedIndex(index);
     };
 
@@ -165,9 +172,7 @@ const Autocomplete = ({
         setIsOpen(true);
         setHighlightedIndex(index);
 
-        menuRef.current
-          ?.querySelector(`div:nth-child(${index + 1})`)
-          ?.scrollIntoView();
+        menuRef.current.scrollTop = Math.max(index * 40 - 80, 0);
       }
     },
     ArrowUp(event) {
@@ -181,9 +186,7 @@ const Autocomplete = ({
         setIsOpen(true);
         setHighlightedIndex(index);
 
-        menuRef.current
-          ?.querySelector(`div:nth-child(${index + 1})`)
-          ?.scrollIntoView();
+        menuRef.current.scrollTop = Math.max(index * 40 - 80, 0);
       }
     },
 
@@ -218,7 +221,10 @@ const Autocomplete = ({
 
   const handleKeyDown = (event) => {
     if (keyDownHandlers[event.key]) keyDownHandlers[event.key](event);
-    else if (!isOpen) {
+  };
+
+  const handleKeyUp = (event) => {
+    if (!isOpen) {
       setIsOpen(true);
     }
   };
@@ -366,6 +372,7 @@ const Autocomplete = ({
         onBlur={handleInputBlur}
         onChange={handleChange}
         onKeyDown={composeEventHandlers(handleKeyDown, inputProps.onKeyDown)}
+        onKeyUp={composeEventHandlers(handleKeyUp, inputProps.onKeyUp)}
         onClick={composeEventHandlers(handleInputClick, inputProps.onClick)}
         value={value}
       />

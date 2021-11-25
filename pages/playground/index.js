@@ -179,14 +179,16 @@ const PlaygroundCalls = ({ apiMessages }) => {
 };
 
 const Playground = () => {
-  const [selectedItem, setSelectedItem] = React.useState(null);
+  const router = useRouter();
+  const [selectedItem, setSelectedItem] = React.useState(
+    getDefaultSelectedItem()
+  );
   const [apiToken, setApiToken] = React.useState("");
   const [request, setRequest] = React.useState("");
   const [deriv_api, setDerivApi] = React.useState();
   const [apiMessages, setApiMessages] = React.useState([]);
   const [requestSchema, setRequestSchema] = React.useState("");
   const [responseSchema, setResponseSchema] = React.useState("");
-  const router = useRouter();
 
   React.useEffect(() => {
     setDerivApi(socket_base.get());
@@ -245,6 +247,11 @@ const Playground = () => {
   "authorize": "${apiToken || ""}"
 }`);
   };
+
+  function getDefaultSelectedItem() {
+    const name = router.asPath.slice(router.asPath.indexOf("#") + 1);
+    return apiCalls.find((item) => item.name === name);
+  }
 
   return (
     <Layout className={css.layout}>
