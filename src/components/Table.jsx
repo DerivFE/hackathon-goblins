@@ -45,7 +45,7 @@ const TD = styled("td", {
 const Actions = styled("td", { display: "flex", justifyContent: "center" });
 
 export const Table = (props) => {
-  const { data } = props;
+  const { data, onUpdate, onDelete } = props;
   return (
     <TableWrapper>
       <MainTable>
@@ -67,8 +67,12 @@ export const Table = (props) => {
                 <TD>{el.scopes.join(", ")}</TD>
                 <TD>{el.redirect_uri}</TD>
                 <Actions>
-                  <Button variant="table">Delete</Button>
-                  <Button variant="table">Update</Button>
+                  <Button variant="table" onClick={() => onDelete(index)}>
+                    Delete
+                  </Button>
+                  <Button variant="table" onClick={() => onUpdate(index)}>
+                    Update
+                  </Button>
                 </Actions>
               </tr>
             );

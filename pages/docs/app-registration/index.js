@@ -10,7 +10,6 @@ import { Checkbox, CheckboxItem } from "components/Checkbox";
 import { Table } from "components/Table";
 
 import inputFields from "./inputFields";
-import { styled } from "stitches.config";
 
 const app_id = 1089;
 
@@ -18,6 +17,7 @@ const AppRegistration = () => {
   const {
     control,
     handleSubmit,
+    setValue,
     // formState: { errors },
   } = useForm({
     defaultValues: {
@@ -34,6 +34,7 @@ const AppRegistration = () => {
 
   const [authToken, setAuthToken] = React.useState("");
   const [tableData, setTableData] = React.useState([]);
+  const [updatedAppID, setUpdatedAppID] = React.useState(null);
 
   const itemsRef = React.useRef([]);
   const ws = React.useRef(null);
@@ -75,8 +76,25 @@ const AppRegistration = () => {
     Object.keys(data).forEach((el) => {
       if (data[el]) appData[el] = data[el];
     });
+    if (updatedAppID == null) {
+      ws.current.send(JSON.stringify({ app_register: 1, ...appData }));
+    } else {
+      ws.current.send(JSON.stringify({ app_update: updatedAppID, ...appData }));
+      setUpdatedAppID(null);
+    }
+  };
 
-    ws.current.send(JSON.stringify({ app_register: 1, ...appData }));
+  const onUpdate = (index) => {
+    const app = tableData[index];
+    setUpdatedAppID(app.app_id);
+    inputFields.forEach((el) => {
+      setValue(el.name, app[el.name]);
+    });
+  };
+
+  const onDelete = (index) => {
+    const app = tableData[index];
+    ws.current.send(JSON.stringify({ app_delete: app.app_id }));
   };
 
   const onError = (errorList, e) => {
@@ -88,19 +106,19 @@ const AppRegistration = () => {
     const response = JSON.parse(e.data);
     if (response.error) {
       alert(response.error.message);
-      console.log(response);
     } else {
-      if (response.authorize) {
+      if (
+        response.authorize ||
+        response.app_register ||
+        response.app_delete ||
+        response.app_update
+      ) {
         ws.current.send(JSON.stringify({ app_list: 1 }));
       } else if (response.app_list) {
         setTableData(response.app_list);
-      } else if (response.app_register) {
-        ws.current.send(JSON.stringify({ app_list: 1 }));
       }
     }
   };
-
-  // console.log(errors);
 
   return (
     <Layout>
@@ -214,12 +232,14 @@ const AppRegistration = () => {
                 />
                 <div className={css.button_wrapper}>
                   <Button type="submit" variant="primary">
-                    Register
+                    {updatedAppID == null ? "Register" : "Update"}
                   </Button>
                 </div>
               </form>
             </div>
-            {tableData.length > 0 && <Table data={tableData} />}
+            {tableData.length > 0 && (
+              <Table data={tableData} onUpdate={onUpdate} onDelete={onDelete} />
+            )}
             <div className={css.horizontal_separator}></div>
             <div className={css.request_json}>
               <h3>Request JSON</h3>
