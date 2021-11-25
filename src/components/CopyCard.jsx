@@ -30,6 +30,7 @@ const CopyCardText = styled("text", {
 
 const CopyButton = styled("div", {
   display: "flex",
+  position: "relative",
   alignItems: "center",
   justifyContent: "flex-end",
   padding: "8px 16px",
@@ -39,6 +40,9 @@ const CopyButton = styled("div", {
 
   "@tablet": {
     padding: "4px 8px",
+  },
+  "@mobileL": {
+    flexDirection: "column-reverse",
   },
 
   variants: {
@@ -50,8 +54,55 @@ const CopyButton = styled("div", {
   },
 });
 
+const ToolTip = styled("div", {
+  width: "140px",
+  backgroundColor: "$textLight",
+  color: "$white",
+  textAlign: "center",
+  borderRadius: "6px",
+  padding: "5px",
+  position: "absolute",
+  zIndex: "1",
+  bottom: "150%",
+  left: "50%",
+  marginLeft: "-75px",
+  transition: "all 0.3s",
+
+  "&::after": {
+    content: "",
+    position: "absolute",
+    top: "100%",
+    left: "50%",
+    marginLeft: "-5px",
+    borderWidth: "5px",
+    borderStyle: "solid",
+    borderColor: "$textLight transparent transparent transparent",
+  },
+
+  "@tabletL": {
+    left: "0%",
+  },
+
+  variants: {
+    visibility: {
+      visible: {
+        visibility: "visible",
+        opacity: "1",
+      },
+      hidden: {
+        visibility: "hidden",
+        opacity: "0",
+      },
+    },
+  },
+  defaultVariants: {
+    visibility: "hidden",
+  },
+});
+
 export const CopyCard = ({ children }) => {
   const [hoverState, setHoverState] = React.useState(false);
+  const [copied, setCopied] = React.useState(false);
   return (
     <CopyCardWrapper>
       <CopyCardText>{children}</CopyCardText>
@@ -64,10 +115,15 @@ export const CopyCard = ({ children }) => {
           setHoverState(false);
         }}
         onClick={() => {
-          navigator.clipboard.writeText(contents[selectedOption].content);
+          navigator.clipboard.writeText(children);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1500);
         }}
       >
         <CopyIcon style={{ margin: "0 9px 0 3px" }} />
+        <ToolTip visibility={copied ? "visible" : "hidden"}>
+          Copied to clipboard
+        </ToolTip>
         Copy
       </CopyButton>
     </CopyCardWrapper>
