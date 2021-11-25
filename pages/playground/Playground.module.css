@@ -79,3 +79,50 @@
   flex: 1;
   overflow: auto;
 }
+
+@media (max-width: 992px) {
+  .parent_wrapper {
+    width: 100% !important;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .request_block {
+    width: 100%;
+    height: auto;
+    padding: 0 16px;
+    margin-bottom: 24px;
+    flex: unset;
+  }
+
+  .schema_blocks {
+    margin-left: 0;
+    width: 100%;
+    height: auto;
+    padding: 0 16px;
+    margin-bottom: 24px;
+    flex: unset;
+  }
+
+  .api_token_wrapper {
+    flex-direction: column;
+    padding: 8px;
+  }
+  .api_token {
+    margin-bottom: 24px;
+  }
+  .page_title {
+    max-width: 480px;
+    padding: 0 16px;
+  }
+  .code_block {
+    overflow-x: scroll;
+  }
+}
+
+@media (max-width: 340px) {
+  .api_token_btn {
+    padding: 10px 8px !important;
+  }
+}
