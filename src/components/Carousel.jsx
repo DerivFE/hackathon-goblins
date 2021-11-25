@@ -52,6 +52,7 @@ const Arrow = styled("span", {
   alignItems: "center",
   fill: "$black",
   padding: "0",
+  userSelect: "none",
 
   variants: {
     left: {

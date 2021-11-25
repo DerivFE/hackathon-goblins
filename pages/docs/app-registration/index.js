@@ -8,6 +8,7 @@ import DocWrapper from "components/tabs/DocWrapper";
 import { Button } from "components/Button";
 import { Checkbox } from "components/Checkbox";
 import { Table } from "components/Table";
+import { PlaygroundCalls } from "pages/playground";
 
 import inputFields from "./inputFields";
 
@@ -30,6 +31,7 @@ const AppRegistration = () => {
   const [authToken, setAuthToken] = React.useState("");
   const [tableData, setTableData] = React.useState([]);
   const [updatedAppID, setUpdatedAppID] = React.useState(null);
+  const [response_list, setResponseList] = React.useState([]);
 
   const itemsRef = React.useRef([]);
   const ws = React.useRef(null);
@@ -42,14 +44,11 @@ const AppRegistration = () => {
     ws.current = new WebSocket(
       "wss://ws.binaryws.com/websockets/v3?app_id=" + app_id
     );
+
     ws.current.onopen = () => console.log("ws opened");
     ws.current.onclose = () => console.log("ws closed");
 
     ws.current.onmessage = (e) => handleMessage(e);
-
-    return () => {
-      ws.current.close();
-    };
   }, []);
 
   const handleAuth = (e) => {
@@ -99,6 +98,7 @@ const AppRegistration = () => {
 
   const handleMessage = (e) => {
     const response = JSON.parse(e.data);
+
     if (response.error) {
       alert(response.error.message);
     } else {
@@ -113,6 +113,9 @@ const AppRegistration = () => {
         setTableData(response.app_list);
       }
     }
+
+    setResponseList(response_list.push(response));
+    console.log(response_list);
   };
 
   return (
@@ -248,6 +251,9 @@ const AppRegistration = () => {
               </div>
             </div>
           </div>
+          {response_list && response_list.length > 0 && (
+            <PlaygroundCalls apiMessages={response_list} />
+          )}
         </DocWrapper>
       </Box>
     </Layout>
