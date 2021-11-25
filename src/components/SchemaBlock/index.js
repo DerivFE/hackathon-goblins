@@ -1,4 +1,5 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
 import { Box } from "components/Box";
 import { Text } from "components/Text";
 import {
@@ -97,7 +98,15 @@ const SchemaPropertiesBlock = ({ properties, property, isAllExpanded }) => {
                 }}
                 onClick={onClick}
               >
-                <Tag hasNoBackground isToggable style={{ color: "#9ed178" }}>
+                <Tag
+                  hasNoBackground
+                  isToggable
+                  style={{
+                    color: "#9ed178",
+                    marginBottom: "0px",
+                    marginRight: "0px",
+                  }}
+                >
                   {type}
                 </Tag>
               </CollapsibleTrigger>
@@ -112,7 +121,23 @@ const SchemaPropertiesBlock = ({ properties, property, isAllExpanded }) => {
           </Box>
         </Box>
         <Text as="span" type="paragraph2" css={{ color: "$colors$textLight" }}>
-          {description}
+          <ReactMarkdown
+            components={{
+              code: ({ node, ...props }) => (
+                <Tag
+                  style={{
+                    backgroundColor: "rgba(255,255,255,.16)",
+                    display: "inline-block",
+                    marginRight: "0px",
+                    color: "#c2c2c2",
+                  }}
+                  {...props}
+                />
+              ),
+            }}
+          >
+            {description}
+          </ReactMarkdown>
         </Text>
         {hasSubProperties && (
           <CollapsibleContent>
