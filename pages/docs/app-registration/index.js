@@ -10,7 +10,7 @@ import { Checkbox } from "components/Checkbox";
 import { Table } from "components/Table";
 import { PlaygroundCalls } from "pages/playground";
 
-import inputFields from "./inputFields";
+import inputFields from "../../../src/config/inputFields";
 
 const app_id = 1089;
 
@@ -49,6 +49,10 @@ const AppRegistration = () => {
     ws.current.onclose = () => console.log("ws closed");
 
     ws.current.onmessage = (e) => handleMessage(e);
+
+    return () => {
+      ws.current.close();
+    };
   }, []);
 
   const handleAuth = (e) => {
