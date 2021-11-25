@@ -1,5 +1,6 @@
 import React from "react";
 import Highlight from "react-highlight";
+import { useRouter } from "next/router";
 import Layout from "components/Layout/Layout";
 import { Box } from "components/Box";
 import Autocomplete from "components/Autocomplete";
@@ -178,7 +179,10 @@ export const PlaygroundCalls = ({ apiMessages }) => {
 };
 
 const Playground = () => {
-  const [selectedItem, setSelectedItem] = React.useState(null);
+  const router = useRouter();
+  const [selectedItem, setSelectedItem] = React.useState(
+    getDefaultSelectedItem()
+  );
   const [apiToken, setApiToken] = React.useState("");
   const [request, setRequest] = React.useState("");
   const [deriv_api, setDerivApi] = React.useState();
@@ -208,11 +212,20 @@ const Playground = () => {
   const sendRequest = () => {
     if (isRequestValid()) {
       const request_obj = JSON.parse(request);
-      deriv_api.send(request_obj).then((response) => {
-        pushToApiMessages(JSON.stringify(response, null, 2));
-      });
+      deriv_api.send(request_obj).then(
+        (response) => {
+          pushToApiMessages(JSON.stringify(response, null, 2));
+        },
+        (error) => {
+          pushToApiMessages(JSON.stringify(error, null, 2));
+        }
+      );
       pushToApiMessages(JSON.stringify(request_obj, null, 2));
     }
+  };
+
+  const pushHash = (hash) => {
+    router.replace(`${router.pathname}${window.location.search}#${hash}`);
   };
 
   const onSelectAPI = async (item) => {
@@ -225,15 +238,27 @@ const Playground = () => {
       setRequestSchema(await send.json());
       const receive = await fetch(paths.receive);
       setResponseSchema(await receive.json());
+      pushHash(item.name);
     }
   };
+
+  const doAuthenticate = () => {
+    setRequest(`{
+  "authorize": "${apiToken || ""}"
+}`);
+  };
+
+  function getDefaultSelectedItem() {
+    const name = router.asPath.slice(router.asPath.indexOf("#") + 1);
+    return apiCalls.find((item) => item.name === name);
+  }
 
   return (
     <Layout className={css.layout}>
       <Box col>
         <h1 className={css.page_title}>API playground</h1>
         <Box jc="center">
-          <Box style={{ width: "90%" }} className={css.parent_wrapper}>
+          <Box col={{ "@tabletL": true }} style={{ width: "90%" }}>
             <Box col className={css.request_block}>
               <Box col>
                 <Autocomplete
@@ -247,8 +272,20 @@ const Playground = () => {
                   selectedItem={selectedItem}
                   onSelect={onSelectAPI}
                 />
-                <Box className={css.api_token_wrapper}>
-                  <Box className={css.api_token} ai="center">
+                <Box
+                  col={{ "@tabletS": true }}
+                  className={css.api_token_wrapper}
+                >
+                  <Box
+                    className={css.api_token}
+                    ai="center"
+                    css={{
+                      "@tabletS": {
+                        borderRight: "0px!important",
+                        paddingTop: "20px",
+                      },
+                    }}
+                  >
                     <input
                       className={css.api_token_input}
                       value={apiToken}
@@ -263,12 +300,24 @@ const Playground = () => {
                         fontSize: "14px",
                       }}
                       variant="primary"
-                      className={css.api_token_btn}
+                      onClick={doAuthenticate}
                     >
                       Authenticate
                     </Button>
                   </Box>
-                  <Box col className={css.get_api_token} ai="center">
+                  <Box
+                    col
+                    css={{
+                      "@tabletS": {
+                        order: -1,
+                        paddingBottom: "20px",
+                        paddingLeft: "0px!important",
+                        borderBottom: "1px solid #252525",
+                      },
+                    }}
+                    className={css.get_api_token}
+                    ai="center"
+                  >
                     <label
                       style={{
                         textAlign: "center",
@@ -279,21 +328,28 @@ const Playground = () => {
                     >
                       Looking for your API token?
                     </label>
-                    <Button
-                      style={{
-                        fontSize: "14px",
-                        color: "white",
-                        border: "solid 2px #6e6e6e",
-                        boxShadow: "none",
-                      }}
-                      variant="secondary"
+                    <a
+                      target="_blank"
+                      href="https://app.deriv.com/account/api-token"
+                      rel="noopener noreferrer"
                     >
-                      Get your API token
-                    </Button>
+                      <Button
+                        style={{
+                          fontSize: "14px",
+                          color: "white",
+                          border: "solid 2px #6e6e6e",
+                          boxShadow: "none",
+                        }}
+                        variant="secondary"
+                      >
+                        Get your API token
+                      </Button>
+                    </a>
                   </Box>
                 </Box>
               </Box>
               <Box className={css.request_wrapper} col>
+                <label className={css.textarea_label}>Request JSON</label>
                 <textarea
                   className={css.request_input}
                   value={request}
@@ -321,11 +377,15 @@ const Playground = () => {
                   </Button>
                 </Box>
               </Box>
-              <Box col>
+              <Box col className={css.playground_calls_wrapper}>
                 <PlaygroundCalls apiMessages={apiMessages} />
               </Box>
             </Box>
-            <Box col className={css.schema_blocks}>
+            <Box
+              col
+              className={css.schema_blocks}
+              css={{ "@tabletL": { marginLeft: "0px!important" } }}
+            >
               {requestSchema && <SchemaBlock schema={requestSchema} />}
               {responseSchema && <SchemaBlock schema={responseSchema} />}
             </Box>

@@ -17,6 +17,7 @@ const StyledMenu = styled("div", {
   position: "absolute",
   overflow: "auto",
   width: "100%",
+  zIndex: "2",
 });
 
 const StyledMenuItem = styled("div", {
@@ -105,6 +106,7 @@ const Autocomplete = ({
   const [dropdownPosition, setDropdownPosition] = React.useState({});
   const inputRef = React.useRef();
   const menuRef = React.useRef();
+  const selectedLabel = getItemValue(selectedItem);
   const [value, setValue] = React.useState("");
 
   const ignoreBlur = React.useRef(false);
@@ -112,7 +114,11 @@ const Autocomplete = ({
   const scrollOffset = React.useRef(null);
   const scrollTimerRef = React.useRef(null);
 
-  const selectedLabel = getItemValue(selectedItem);
+  React.useEffect(() => {
+    if (selectedItem) {
+      onSelect(selectedItem);
+    }
+  }, []);
 
   React.useEffect(() => {
     return () => {
@@ -128,7 +134,7 @@ const Autocomplete = ({
   }, [selectedLabel]);
 
   React.useEffect(() => {
-    if (value !== getItemValue(selectedItem)) {
+    if (value !== "" && value !== getItemValue(selectedItem)) {
       onSelect?.(null);
     }
   }, [value]);
@@ -141,9 +147,12 @@ const Autocomplete = ({
     };
     const maybeScrollItemIntoView = () => {
       const index = getSelectedItemIndex();
-      menuRef.current
-        ?.querySelector(`div:nth-child(${index + 1})`)
-        ?.scrollIntoView();
+
+      setTimeout(() => {
+        if (menuRef.current) {
+          menuRef.current.scrollTop = Math.max(index * 40 - 80, 0);
+        }
+      });
       setHighlightedIndex(index);
     };
 
@@ -165,9 +174,9 @@ const Autocomplete = ({
         setIsOpen(true);
         setHighlightedIndex(index);
 
-        menuRef.current
-          ?.querySelector(`div:nth-child(${index + 1})`)
-          ?.scrollIntoView();
+        if (menuRef.current) {
+          menuRef.current.scrollTop = Math.max(index * 40 - 80, 0);
+        }
       }
     },
     ArrowUp(event) {
@@ -181,9 +190,9 @@ const Autocomplete = ({
         setIsOpen(true);
         setHighlightedIndex(index);
 
-        menuRef.current
-          ?.querySelector(`div:nth-child(${index + 1})`)
-          ?.scrollIntoView();
+        if (menuRef.current) {
+          menuRef.current.scrollTop = Math.max(index * 40 - 80, 0);
+        }
       }
     },
 
@@ -218,7 +227,10 @@ const Autocomplete = ({
 
   const handleKeyDown = (event) => {
     if (keyDownHandlers[event.key]) keyDownHandlers[event.key](event);
-    else if (!isOpen) {
+  };
+
+  const handleKeyUp = (event) => {
+    if (!keyDownHandlers[event.key] && !isOpen) {
       setIsOpen(true);
     }
   };
@@ -298,6 +310,7 @@ const Autocomplete = ({
   };
 
   const handleInputBlur = (event) => {
+    ignoreFocus.current = false;
     if (ignoreBlur.current) {
       scrollOffset.current = getScrollOffset();
       inputRef.current.focus();
@@ -314,18 +327,23 @@ const Autocomplete = ({
   const handleInputFocus = (event) => {
     if (ignoreFocus.current) {
       ignoreFocus.current = false;
-      const { x, y } = scrollOffset.current;
-      scrollOffset.current = null;
-      window.scrollTo(x, y);
 
-      clearTimeout(scrollTimerRef.current);
-      scrollTimerRef.current = setTimeout(() => {
-        scrollTimerRef.current = null;
+      if (scrollOffset.current) {
+        const { x, y } = scrollOffset.current;
+        scrollOffset.current = null;
         window.scrollTo(x, y);
-      }, 0);
+
+        clearTimeout(scrollTimerRef.current);
+        scrollTimerRef.current = setTimeout(() => {
+          scrollTimerRef.current = null;
+          window.scrollTo(x, y);
+        }, 0);
+      }
+
       return;
     }
-    setIsOpen(true);
+
+    ignoreFocus.current = true;
     const { onFocus } = inputProps;
     if (onFocus) {
       onFocus(event);
@@ -366,6 +384,7 @@ const Autocomplete = ({
         onBlur={handleInputBlur}
         onChange={handleChange}
         onKeyDown={composeEventHandlers(handleKeyDown, inputProps.onKeyDown)}
+        onKeyUp={composeEventHandlers(handleKeyUp, inputProps.onKeyUp)}
         onClick={composeEventHandlers(handleInputClick, inputProps.onClick)}
         value={value}
       />

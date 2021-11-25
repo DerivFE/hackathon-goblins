@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import Link from "next/link";
+import { Link } from "components/Link/Link";
 import { Button } from "components/Button";
 import Image from "next/image";
 import { Carousel, CarouselItem } from "components/Carousel";
@@ -239,9 +239,12 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <Text type="paragraph2" className={css.steps_small_desc}>
+            <Text as="p" type="paragraph1" className={css.steps_small_desc}>
               By using our API, you confirm that you have read and agreed to our
-              terms and conditions.
+              <Link href="/tnc/business-partners-api-user.pdf">
+                terms and conditions
+              </Link>
+              .
             </Text>
           </div>
         </div>
