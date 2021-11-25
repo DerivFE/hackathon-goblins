@@ -22,13 +22,13 @@ const AppRegistration = () => {
   } = useForm({
     defaultValues: {
       name: "",
-      redirectURL: "",
-      verificationURL: "",
-      homepageURL: "",
-      githubURL: "",
-      AppstoreURL: "",
-      googlePlayURL: "",
-      markupPercentage: "",
+      redirect_uri: "",
+      verification_uri: "",
+      homepage: "",
+      github: "",
+      appstore: "",
+      googleplay: "",
+      app_markup_percentage: "",
     },
   });
 
@@ -61,7 +61,22 @@ const AppRegistration = () => {
   };
 
   const onSubmit = (data) => {
-    ws.current.send(JSON.stringify({ app_register: 1, ...data }));
+    const scopeList = Object.keys(data).filter((el) => {
+      return data[el] === true;
+    });
+
+    ["read", "trade", "payments", "trading_information", "admin"].forEach(
+      (el) => delete data[el]
+    );
+    const appData = {
+      scopes: scopeList,
+    };
+
+    Object.keys(data).forEach((el) => {
+      if (data[el]) appData[el] = data[el];
+    });
+
+    ws.current.send(JSON.stringify({ app_register: 1, ...appData }));
   };
 
   const onError = (errorList, e) => {
@@ -73,11 +88,14 @@ const AppRegistration = () => {
     const response = JSON.parse(e.data);
     if (response.error) {
       alert(response.error.message);
+      console.log(response);
     } else {
       if (response.authorize) {
         ws.current.send(JSON.stringify({ app_list: 1 }));
       } else if (response.app_list) {
         setTableData(response.app_list);
+      } else if (response.app_register) {
+        ws.current.send(JSON.stringify({ app_list: 1 }));
       }
     }
   };
