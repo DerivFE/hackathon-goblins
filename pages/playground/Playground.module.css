@@ -101,3 +101,11 @@
   transition: all 0.25s ease;
   padding: 8px;
 }
+
+@media (max-width: 992px) {
+  .request_block,
+  .schema_blocks {
+    flex: unset;
+    margin-bottom: 24px;
+  }
+}
