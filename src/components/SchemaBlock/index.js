@@ -1,4 +1,5 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
 import { Box } from "components/Box";
 import { Text } from "components/Text";
 import {
@@ -10,14 +11,14 @@ import css from "./SchemaBlock.module.css";
 
 const Tag = ({ children, style = {}, hasNoBackground, isToggable }) => {
   const commonStyle = {
-    color: isToggable ? undefined : "#85acb0",
+    color: isToggable ? undefined : style.color || "#85acb0",
   };
 
   const localStyle = {
     ...style,
     ...commonStyle,
     ...(hasNoBackground
-      ? {}
+      ? { paddingRight: "0px", paddingLeft: "0px" }
       : { backgroundColor: "rgba(133, 172, 176, 0.16)" }),
   };
 
@@ -81,6 +82,11 @@ const SchemaPropertiesBlock = ({ properties, property, isAllExpanded }) => {
             {property}
           </Text>
           <Box style={{ flex: 1, flexWrap: "wrap" }}>
+            {enumProp.length > 0 && (
+              <Tag hasNoBackground style={{ color: "#c2c2c2" }}>
+                enum
+              </Tag>
+            )}
             {hasSubProperties ? (
               <CollapsibleTrigger
                 style={{
@@ -92,12 +98,22 @@ const SchemaPropertiesBlock = ({ properties, property, isAllExpanded }) => {
                 }}
                 onClick={onClick}
               >
-                <Tag hasNoBackground isToggable>
+                <Tag
+                  hasNoBackground
+                  isToggable
+                  style={{
+                    color: "#9ed178",
+                    marginBottom: "0px",
+                    marginRight: "0px",
+                  }}
+                >
                   {type}
                 </Tag>
               </CollapsibleTrigger>
             ) : (
-              <Tag hasNoBackground>{type}</Tag>
+              <Tag hasNoBackground style={{ color: "#9ed178" }}>
+                {type}
+              </Tag>
             )}
             {enumProp.map((item) => (
               <Tag key={item}>{item}</Tag>
@@ -105,7 +121,23 @@ const SchemaPropertiesBlock = ({ properties, property, isAllExpanded }) => {
           </Box>
         </Box>
         <Text as="span" type="paragraph2" css={{ color: "$colors$textLight" }}>
-          {description}
+          <ReactMarkdown
+            components={{
+              code: ({ node, ...props }) => (
+                <Tag
+                  style={{
+                    backgroundColor: "rgba(255,255,255,.16)",
+                    display: "inline-block",
+                    marginRight: "0px",
+                    color: "#c2c2c2",
+                  }}
+                  {...props}
+                />
+              ),
+            }}
+          >
+            {description}
+          </ReactMarkdown>
         </Text>
         {hasSubProperties && (
           <CollapsibleContent>
