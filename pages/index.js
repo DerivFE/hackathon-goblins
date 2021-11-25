@@ -258,12 +258,36 @@ const Home = () => {
                 </Text>
                 <span className={css.underline} />
                 <Text type="paragraph1">
-                  <strong>Thiago</strong>, Entrepreneur | Brazil
+                  <strong>Thiago</strong>, entrepreneur | Brazil
                 </Text>
               </div>
             </CarouselItem>
             <CarouselItem>
-              <div className={css.testimony}></div>
+              <div className={css.testimony}>
+                <Text type="paragraph1" css={{ mb: "32px" }}>
+                  I have been using the Deriv API for 13 years to build
+                  successful apps in and I find the support I get from Deriv as
+                  a business partner second to none. I look forward to 13 more
+                  successful years to come.
+                </Text>
+                <span className={css.underline} />
+                <Text type="paragraph1">
+                  <strong>Josh</strong>, trader | Australia
+                </Text>
+              </div>
+            </CarouselItem>
+            <CarouselItem>
+              <div className={css.testimony}>
+                <Text type="paragraph1" css={{ mb: "32px" }}>
+                  Probably the best API for making your business successful in
+                  To be honest, Deriv’s API is one of the best APIs in the
+                  trading market.
+                </Text>
+                <span className={css.underline} />
+                <Text type="paragraph1">
+                  <strong>Alessandro</strong>, CEO | Italy
+                </Text>
+              </div>
             </CarouselItem>
           </Carousel>
         </div>

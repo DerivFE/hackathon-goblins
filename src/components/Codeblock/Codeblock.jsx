@@ -28,7 +28,7 @@ const ContentWrapper = styled("div", {
 
     '& pre': {
         whiteSpace:"break-spaces",
-        overflowX:"scroll",
+        overflowX:"auto",
     },
     
 })
