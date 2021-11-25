@@ -74,11 +74,14 @@ export const CheckboxItem = ({ children }) => {
   );
 };
 
-export const Checkbox = ({ value, children }) => {
+export const Checkbox = React.forwardRef(function Checkbox(
+  { children, formFields },
+  ref
+) {
   return (
     <SimpleCheckbox>
-      <input type="checkbox" value={value} />
+      <input ref={ref} type="checkbox" {...formFields} />
       <label>{children}</label>
     </SimpleCheckbox>
   );
-};
+});

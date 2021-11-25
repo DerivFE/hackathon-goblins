@@ -8,57 +8,18 @@ import DocWrapper from "components/tabs/DocWrapper";
 import { Button } from "components/Button";
 import { Checkbox, CheckboxItem } from "components/Checkbox";
 import { Table } from "components/Table";
-import { styled } from "stitches.config";
 
-const inputFields = [
-  {
-    label: "Name (Required)",
-    placeholder_text: "Name (Required)",
-    name: "name",
-    required: true,
-  },
-  {
-    label: "Redirect URL (Required)",
-    placeholder_text: "Redirect URL (Required)",
-    name: "redirectURL",
-    required: true,
-  },
-  {
-    label: "Verification URL",
-    placeholder_text: "Verification URL",
-    name: "verificationURL",
-  },
-  {
-    label: "Homepage URL",
-    placeholder_text: "Homepage URL",
-    name: "homepageURL",
-  },
-  {
-    label: "Github URL",
-    placeholder_text: "Github URL",
-    name: "githubURL",
-  },
-  {
-    label: "Appstore URL",
-    placeholder_text: "Appstore URL",
-    name: "AppstoreURL",
-  },
-  {
-    label: "Google Play URL",
-    placeholder_text: "Google Play URL",
-    name: "googlePlayURL",
-  },
-  {
-    label: "Markup percentage",
-    placeholder_text: "Markup percentage",
-    name: "markupPercentage",
-  },
-];
+import inputFields from "./inputFields";
+import { styled } from "stitches.config";
 
 const app_id = 1089;
 
 const AppRegistration = () => {
-  const { control, handleSubmit } = useForm({
+  const {
+    control,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm({
     defaultValues: {
       name: "",
       redirectURL: "",
@@ -99,7 +60,14 @@ const AppRegistration = () => {
     ws.current.send(JSON.stringify({ authorize: authToken || "" }));
   };
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    ws.current.send(JSON.stringify({ app_register: 1, ...data }));
+  };
+
+  const onError = (errorList, e) => {
+    const firsError = Object.keys(errorList)[0];
+    alert(`${firsError}: invalid input`);
+  };
 
   const handleMessage = (e) => {
     const response = JSON.parse(e.data);
@@ -113,6 +81,8 @@ const AppRegistration = () => {
       }
     }
   };
+
+  // console.log(errors);
 
   return (
     <Layout>
@@ -150,13 +120,22 @@ const AppRegistration = () => {
             <div className={css.horizontal_separator}></div>
             <div className={css.main_form}>
               <h2 className={css.form_header}>Register your app</h2>
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form onSubmit={handleSubmit(onSubmit, onError)}>
                 {inputFields.map((inputField, index) => {
                   return (
                     <Controller
                       key={inputField.name}
                       name={inputField.name}
                       control={control}
+                      rules={{
+                        required: inputField.validationRules.required,
+                        validate: (value) => {
+                          return value
+                            ? inputField.validationRules.regex.test(value) ||
+                                "Invalid input"
+                            : true;
+                        },
+                      }}
                       render={({ field }) => (
                         <Input
                           formFieldProps={field}
@@ -170,15 +149,51 @@ const AppRegistration = () => {
                     />
                   );
                 })}
-                <Checkbox>Read: View account activity</Checkbox>
-                <Checkbox>Trade: Buy and sell contracts</Checkbox>
-                <Checkbox>
-                  Trading Information: View trading and balance information
-                </Checkbox>
-                <Checkbox>Payments: Cashier (Deposit, Withdraw)</Checkbox>
-                <Checkbox>
-                  Admin: API token management, application management
-                </Checkbox>
+                <Controller
+                  name="read"
+                  control={control}
+                  render={({ field }) => (
+                    <Checkbox formFields={field}>
+                      Read: View account activity
+                    </Checkbox>
+                  )}
+                />
+                <Controller
+                  name="trade"
+                  control={control}
+                  render={({ field }) => (
+                    <Checkbox formFields={field}>
+                      Trade: Buy and sell contracts
+                    </Checkbox>
+                  )}
+                />
+                <Controller
+                  name="trading_information"
+                  control={control}
+                  render={({ field }) => (
+                    <Checkbox formFields={field}>
+                      Trading Information: View trading and balance information
+                    </Checkbox>
+                  )}
+                />
+                <Controller
+                  name="payments"
+                  control={control}
+                  render={({ field }) => (
+                    <Checkbox formFields={field}>
+                      Payments: Cashier (Deposit, Withdraw)
+                    </Checkbox>
+                  )}
+                />
+                <Controller
+                  name="admin"
+                  control={control}
+                  render={({ field }) => (
+                    <Checkbox formFields={field}>
+                      Admin: API token management, application management
+                    </Checkbox>
+                  )}
+                />
                 <div className={css.button_wrapper}>
                   <Button type="submit" variant="primary">
                     Register
