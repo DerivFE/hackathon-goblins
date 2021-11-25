@@ -233,7 +233,7 @@ const Playground = () => {
       <Box col>
         <h1 className={css.page_title}>API playground</h1>
         <Box jc="center">
-          <Box style={{ width: "90%" }}>
+          <Box style={{ width: "90%" }} className={css.parent_wrapper}>
             <Box col className={css.request_block}>
               <Box col>
                 <Autocomplete
@@ -263,6 +263,7 @@ const Playground = () => {
                         fontSize: "14px",
                       }}
                       variant="primary"
+                      className={css.api_token_btn}
                     >
                       Authenticate
                     </Button>
