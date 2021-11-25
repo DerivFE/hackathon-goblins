@@ -1,8 +1,41 @@
 import React from "react";
+import Highlight from "react-highlight";
 import Layout from "components/Layout/Layout";
 import { Box } from "components/Box";
-import DocWrapper from "components/tabs/DocWrapper";
 import Autocomplete from "components/Autocomplete";
+import css from "./Playground.module.css";
+import { Button } from "components/Button";
+import socket_base from "src/common/socket_base";
+import SchemaBlock from "src/components/SchemaBlock";
+
+function isProduction(url) {
+  return (
+    url &&
+    (/(api\.deriv\.com|binary\.sx)/i.test(url) ||
+      /(staging-api\.deriv\.com)/i.test(url) ||
+      /vercel\.app/i.test(url))
+  );
+}
+
+function isLocal(url) {
+  return /\/\/(localhost|127\.0\.0\.1)/.test(url);
+}
+
+function getBaseUrl() {
+  const url = document.location.href;
+  return (
+    (isProduction(url) || isLocal(url) ? "" : "/" + url.split("/")[3]) + "/"
+  );
+}
+
+export function getJsonPaths(method_name) {
+  const url_path = getBaseUrl() + "config/v3/" + method_name + "/";
+  return {
+    send: url_path + "send.json",
+    receive: url_path + "receive.json",
+    example: url_path + "example.json",
+  };
+}
 
 const apiCalls = [
   { name: "active_symbols", title: "Active Symbols" },
@@ -130,22 +163,174 @@ const apiCalls = [
   { name: "website_status", title: "Server Status" },
 ];
 
+const PlaygroundCalls = ({ apiMessages }) => {
+  return (
+    <Box col className={css.playground_calls}>
+      {apiMessages.map((message, index) => (
+        <Box key={index} className={css.code_block_wrapper}>
+          <Box className={css.code_block}>
+            <Highlight>{message}</Highlight>
+          </Box>
+        </Box>
+      ))}
+    </Box>
+  );
+};
+
 const Playground = () => {
-  const [selectedItem, setSelectedItem] = React.useState({});
+  const [selectedItem, setSelectedItem] = React.useState(null);
+  const [apiToken, setApiToken] = React.useState("");
+  const [request, setRequest] = React.useState("");
+  const [deriv_api, setDerivApi] = React.useState();
+  const [apiMessages, setApiMessages] = React.useState([]);
+  const [requestSchema, setRequestSchema] = React.useState("");
+  const [responseSchema, setResponseSchema] = React.useState("");
+
+  React.useEffect(() => {
+    setDerivApi(socket_base.get());
+  }, []);
+
+  const isRequestValid = () => {
+    try {
+      JSON.parse(request);
+      return true;
+    } catch (e) {
+      window.alert("Invalid JSON");
+    }
+    return false;
+  };
+
+  const pushToApiMessages = (message) => {
+    apiMessages.push(message);
+    setApiMessages([...apiMessages]);
+  };
+
+  const sendRequest = () => {
+    if (isRequestValid()) {
+      const request_obj = JSON.parse(request);
+      deriv_api.send(request_obj).then((response) => {
+        pushToApiMessages(JSON.stringify(response, null, 2));
+      });
+      pushToApiMessages(JSON.stringify(request_obj, null, 2));
+    }
+  };
+
+  const onSelectAPI = async (item) => {
+    setSelectedItem(item);
+    if (item?.name) {
+      const paths = getJsonPaths(item?.name);
+      const example = await fetch(paths.example);
+      setRequest(JSON.stringify(await example.json(), null, 2));
+      const send = await fetch(paths.send);
+      setRequestSchema(await send.json());
+      const receive = await fetch(paths.receive);
+      setResponseSchema(await receive.json());
+    }
+  };
 
   return (
-    <Layout>
+    <Layout className={css.layout}>
       <Box col>
-        <div style={{ display: "flex", width: "50%" }}>
-          <Autocomplete
-            getItemKey={(item) => item?.name || ""}
-            getItemValue={(item) => item?.title || ""}
-            items={apiCalls}
-            renderItem={(item) => <React.Fragment>{item.title}</React.Fragment>}
-            selectedItem={selectedItem}
-            onSelect={(item) => setSelectedItem(item)}
-          />
-        </div>
+        <h1 className={css.page_title}>API playground</h1>
+        <Box jc="center">
+          <Box style={{ width: "90%" }} className={css.parent_wrapper}>
+            <Box col className={css.request_block}>
+              <Box col>
+                <Autocomplete
+                  label={"API Calls"}
+                  getItemKey={(item) => item?.name || ""}
+                  getItemValue={(item) => item?.title || ""}
+                  items={apiCalls}
+                  renderItem={(item) => (
+                    <React.Fragment>{item.title}</React.Fragment>
+                  )}
+                  selectedItem={selectedItem}
+                  onSelect={onSelectAPI}
+                />
+                <Box className={css.api_token_wrapper}>
+                  <Box className={css.api_token} ai="center">
+                    <input
+                      className={css.api_token_input}
+                      value={apiToken}
+                      onChange={(e) => setApiToken(e.target.value)}
+                      placeholder="API Token"
+                    />
+                    <Button
+                      style={{
+                        padding: "10px 16px",
+                        borderTopLeftRadius: 0,
+                        borderBottomLeftRadius: 0,
+                        fontSize: "14px",
+                      }}
+                      variant="primary"
+                      className={css.api_token_btn}
+                    >
+                      Authenticate
+                    </Button>
+                  </Box>
+                  <Box col className={css.get_api_token} ai="center">
+                    <label
+                      style={{
+                        textAlign: "center",
+                        marginBottom: "16px",
+                        color: "#c2c2c2",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Looking for your API token?
+                    </label>
+                    <Button
+                      style={{
+                        fontSize: "14px",
+                        color: "white",
+                        border: "solid 2px #6e6e6e",
+                        boxShadow: "none",
+                      }}
+                      variant="secondary"
+                    >
+                      Get your API token
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
+              <Box className={css.request_wrapper} col>
+                <textarea
+                  className={css.request_input}
+                  value={request}
+                  onChange={(e) => setRequest(e.target.value)}
+                />
+                <Box jc="center" className={css.request_input_wrapper}>
+                  <Button
+                    style={{
+                      fontSize: "14px",
+                      color: "white",
+                      marginRight: "8px",
+                      boxShadow: "none",
+                      border: "solid 2px #6e6e6e",
+                    }}
+                    variant="secondary"
+                  >
+                    Reset Connection
+                  </Button>
+                  <Button
+                    style={{ fontSize: "14px", color: "white" }}
+                    variant="primary"
+                    onClick={sendRequest}
+                  >
+                    Send Request
+                  </Button>
+                </Box>
+              </Box>
+              <Box col>
+                <PlaygroundCalls apiMessages={apiMessages} />
+              </Box>
+            </Box>
+            <Box col className={css.schema_blocks}>
+              {requestSchema && <SchemaBlock schema={requestSchema} />}
+              {responseSchema && <SchemaBlock schema={responseSchema} />}
+            </Box>
+          </Box>
+        </Box>
       </Box>
     </Layout>
   );

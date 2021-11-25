@@ -1,4 +1,5 @@
 import Head from "next/head";
+import classNames from "classnames";
 import TopNavigation from "components/Navigation/TopNavigation";
 import MainNavigation from "components/Navigation/MainNavigation";
 import css from "./Layout.module.css";
@@ -7,7 +8,7 @@ const default_page_name = "Page";
 const default_description =
   "Build your own trading platform, powered by the Deriv API. We use WebSockets for fast, two-way messaging between your apps and our trading services.";
 
-const Layout = ({ children, description, page_name }) => {
+const Layout = ({ className, children, description, page_name }) => {
   return (
     <>
       <Head>
@@ -29,7 +30,7 @@ const Layout = ({ children, description, page_name }) => {
       </Head>
       <TopNavigation />
       <MainNavigation />
-      <div className={css.main}>{children}</div>
+      <div className={classNames(className, css.main)}>{children}</div>
     </>
   );
 };

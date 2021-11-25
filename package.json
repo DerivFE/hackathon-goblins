@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@deriv/deriv-api": "^1.0.9",
     "@radix-ui/react-accordion": "^0.1.1",
     "@radix-ui/react-id": "^0.1.1",
     "@radix-ui/react-tabs": "^0.1.1",
