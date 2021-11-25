@@ -54,9 +54,9 @@ const CopyButton = styled("div", {
   },
 });
 
-const ToolTip = styled("div", {
+export const ToolTip = styled("div", {
   width: "140px",
-  backgroundColor: "$textLight",
+  backgroundColor: "$black",
   color: "$white",
   textAlign: "center",
   borderRadius: "6px",
@@ -76,7 +76,7 @@ const ToolTip = styled("div", {
     marginLeft: "-5px",
     borderWidth: "5px",
     borderStyle: "solid",
-    borderColor: "$textLight transparent transparent transparent",
+    borderColor: "$black transparent transparent transparent",
   },
 
   "@tabletL": {
