@@ -149,7 +149,9 @@ const Autocomplete = ({
       const index = getSelectedItemIndex();
 
       setTimeout(() => {
-        menuRef.current.scrollTop = Math.max(index * 40 - 80, 0);
+        if (menuRef.current) {
+          menuRef.current.scrollTop = Math.max(index * 40 - 80, 0);
+        }
       });
       setHighlightedIndex(index);
     };
@@ -172,7 +174,9 @@ const Autocomplete = ({
         setIsOpen(true);
         setHighlightedIndex(index);
 
-        menuRef.current.scrollTop = Math.max(index * 40 - 80, 0);
+        if (menuRef.current) {
+          menuRef.current.scrollTop = Math.max(index * 40 - 80, 0);
+        }
       }
     },
     ArrowUp(event) {
@@ -186,7 +190,9 @@ const Autocomplete = ({
         setIsOpen(true);
         setHighlightedIndex(index);
 
-        menuRef.current.scrollTop = Math.max(index * 40 - 80, 0);
+        if (menuRef.current) {
+          menuRef.current.scrollTop = Math.max(index * 40 - 80, 0);
+        }
       }
     },
 
@@ -224,7 +230,7 @@ const Autocomplete = ({
   };
 
   const handleKeyUp = (event) => {
-    if (!isOpen) {
+    if (!keyDownHandlers[event.key] && !isOpen) {
       setIsOpen(true);
     }
   };
@@ -304,6 +310,7 @@ const Autocomplete = ({
   };
 
   const handleInputBlur = (event) => {
+    ignoreFocus.current = false;
     if (ignoreBlur.current) {
       scrollOffset.current = getScrollOffset();
       inputRef.current.focus();
@@ -320,18 +327,23 @@ const Autocomplete = ({
   const handleInputFocus = (event) => {
     if (ignoreFocus.current) {
       ignoreFocus.current = false;
-      const { x, y } = scrollOffset.current;
-      scrollOffset.current = null;
-      window.scrollTo(x, y);
 
-      clearTimeout(scrollTimerRef.current);
-      scrollTimerRef.current = setTimeout(() => {
-        scrollTimerRef.current = null;
+      if (scrollOffset.current) {
+        const { x, y } = scrollOffset.current;
+        scrollOffset.current = null;
         window.scrollTo(x, y);
-      }, 0);
+
+        clearTimeout(scrollTimerRef.current);
+        scrollTimerRef.current = setTimeout(() => {
+          scrollTimerRef.current = null;
+          window.scrollTo(x, y);
+        }, 0);
+      }
+
       return;
     }
-    setIsOpen(true);
+
+    ignoreFocus.current = true;
     const { onFocus } = inputProps;
     if (onFocus) {
       onFocus(event);
