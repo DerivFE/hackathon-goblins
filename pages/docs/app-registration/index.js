@@ -1,12 +1,12 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import Layout from "components/layout/Layout";
+import Layout from "components/Layout/Layout";
 import css from "./AppRegistration.module.css";
 import { Box } from "components/Box";
 import { Input } from "components/Input";
 import DocWrapper from "components/tabs/DocWrapper";
 import { Button } from "components/Button";
-import { Checkbox, CheckboxItem } from "components/Checkbox";
+import { Checkbox } from "components/Checkbox";
 import { Table } from "components/Table";
 
 import inputFields from "./inputFields";
@@ -14,12 +14,7 @@ import inputFields from "./inputFields";
 const app_id = 1089;
 
 const AppRegistration = () => {
-  const {
-    control,
-    handleSubmit,
-    setValue,
-    // formState: { errors },
-  } = useForm({
+  const { control, handleSubmit, setValue } = useForm({
     defaultValues: {
       name: "",
       redirect_uri: "",
