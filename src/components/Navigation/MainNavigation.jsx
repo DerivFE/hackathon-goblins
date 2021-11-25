@@ -49,7 +49,7 @@ const MainNavigation = () => {
             {nav_items.map((n) => {
               return (
                 <Link key={n.name} href={n.url} passHref>
-                  <a className={router.pathname === n.url ? css.selected : []}>
+                  <a className={router.pathname === n.url || (n.sublinks && n.sublinks.find(s => s.url === router.pathname)) ? css.selected : []}>
                     {n.name}
                   </a>
                 </Link>
