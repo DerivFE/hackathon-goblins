@@ -17,6 +17,7 @@ const StyledMenu = styled("div", {
   position: "absolute",
   overflow: "auto",
   width: "100%",
+  zIndex: "2",
 });
 
 const StyledMenuItem = styled("div", {
@@ -141,9 +142,8 @@ const Autocomplete = ({
     };
     const maybeScrollItemIntoView = () => {
       const index = getSelectedItemIndex();
-      menuRef.current
-        ?.querySelector(`div:nth-child(${index + 1})`)
-        ?.scrollIntoView();
+
+      menuRef.current.scrollTop = Math.max(index * 40 - 80, 0);
       setHighlightedIndex(index);
     };
 

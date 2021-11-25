@@ -80,7 +80,7 @@ const SchemaPropertiesBlock = ({ properties, property, isAllExpanded }) => {
           >
             {property}
           </Text>
-          <Box style={{ flex: 1 }}>
+          <Box style={{ flex: 1, flexWrap: "wrap" }}>
             {hasSubProperties ? (
               <CollapsibleTrigger
                 style={{
@@ -177,7 +177,7 @@ const SchemaBlock = ({ schema, isNested }) => {
           >
             {description}
           </Text>
-          {auth_required && (
+          {auth_required ? (
             <Box style={{ flex: 0 }} ai="center">
               <Text
                 as="span"
@@ -190,7 +190,7 @@ const SchemaBlock = ({ schema, isNested }) => {
                 <Tag key={index}>{scope}</Tag>
               ))}
             </Box>
-          )}
+          ) : null}
         </Box>
       </Box>
       {properties && (

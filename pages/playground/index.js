@@ -1,5 +1,6 @@
 import React from "react";
 import Highlight from "react-highlight";
+import { useRouter } from "next/router";
 import Layout from "components/Layout/Layout";
 import { Box } from "components/Box";
 import Autocomplete from "components/Autocomplete";
@@ -185,6 +186,7 @@ const Playground = () => {
   const [apiMessages, setApiMessages] = React.useState([]);
   const [requestSchema, setRequestSchema] = React.useState("");
   const [responseSchema, setResponseSchema] = React.useState("");
+  const router = useRouter();
 
   React.useEffect(() => {
     setDerivApi(socket_base.get());
@@ -215,6 +217,10 @@ const Playground = () => {
     }
   };
 
+  const pushHash = (hash) => {
+    router.replace(`${router.pathname}${window.location.search}#${hash}`);
+  };
+
   const onSelectAPI = async (item) => {
     setSelectedItem(item);
     if (item?.name) {
@@ -225,7 +231,14 @@ const Playground = () => {
       setRequestSchema(await send.json());
       const receive = await fetch(paths.receive);
       setResponseSchema(await receive.json());
+      pushHash(item.name);
     }
+  };
+
+  const doAuthenticate = () => {
+    setRequest(`{
+  "authorize": "${apiToken || ""}"
+}`);
   };
 
   return (
@@ -263,6 +276,7 @@ const Playground = () => {
                         fontSize: "14px",
                       }}
                       variant="primary"
+                      onClick={doAuthenticate}
                     >
                       Authenticate
                     </Button>
@@ -278,21 +292,28 @@ const Playground = () => {
                     >
                       Looking for your API token?
                     </label>
-                    <Button
-                      style={{
-                        fontSize: "14px",
-                        color: "white",
-                        border: "solid 2px #6e6e6e",
-                        boxShadow: "none",
-                      }}
-                      variant="secondary"
+                    <a
+                      target="_blank"
+                      href="https://app.deriv.com/account/api-token"
+                      rel="noopener noreferrer"
                     >
-                      Get your API token
-                    </Button>
+                      <Button
+                        style={{
+                          fontSize: "14px",
+                          color: "white",
+                          border: "solid 2px #6e6e6e",
+                          boxShadow: "none",
+                        }}
+                        variant="secondary"
+                      >
+                        Get your API token
+                      </Button>
+                    </a>
                   </Box>
                 </Box>
               </Box>
               <Box className={css.request_wrapper} col>
+                <label className={css.textarea_label}>Request JSON</label>
                 <textarea
                   className={css.request_input}
                   value={request}
@@ -320,7 +341,7 @@ const Playground = () => {
                   </Button>
                 </Box>
               </Box>
-              <Box col>
+              <Box col className={css.playground_calls_wrapper}>
                 <PlaygroundCalls apiMessages={apiMessages} />
               </Box>
             </Box>

@@ -35,6 +35,7 @@
   background: #0e0e0e;
   color: inherit;
   border: 0;
+  outline: 0;
 }
 
 .get_api_token {
@@ -52,6 +53,8 @@
   background: inherit;
   color: inherit;
   margin-bottom: 25px;
+  padding: 10px;
+  outline: 0;
 }
 
 .request_input_wrapper {
@@ -66,8 +69,13 @@
 }
 
 .playground_calls {
+  overflow: auto;
+  max-height: 60vh;
+}
+
+.playground_calls_wrapper {
   background-color: #151717;
-  padding-bottom: 8px;
+  padding-bottom: 24px;
 }
 
 .request_block {
@@ -78,4 +86,14 @@
   margin-left: 24px;
   flex: 1;
   overflow: auto;
+}
+
+.textarea_label {
+  transform: translate(0.7rem, -0.8rem) scale(0.75);
+  background-color: #151717;
+  color: #ffffff;
+  position: absolute;
+  transform-origin: top left;
+  transition: all 0.25s ease;
+  padding: 8px;
 }
