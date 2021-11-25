@@ -7,7 +7,6 @@ import {
   CollapsibleTrigger,
 } from "components/Collapsible";
 import css from "./SchemaBlock.module.css";
-import Highlight from "react-highlight";
 
 const Tag = ({ children, style = {}, hasNoBackground, isToggable }) => {
   const commonStyle = {
