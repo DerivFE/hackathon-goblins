@@ -35,6 +35,7 @@
   background: #0e0e0e;
   color: inherit;
   border: 0;
+  outline: 0;
 }
 
 .get_api_token {
@@ -52,6 +53,9 @@
   background: inherit;
   color: inherit;
   margin-bottom: 25px;
+  padding: 10px;
+  outline: 0;
+  box-sizing: border-box;
 }
 
 .request_input_wrapper {
@@ -63,15 +67,23 @@
 .code_block {
   background-color: #0e0e0e;
   border-radius: 4px;
+  overflow: auto;
 }
 
 .playground_calls {
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.playground_calls_wrapper {
   background-color: #151717;
-  padding-bottom: 8px;
+  padding-bottom: 24px;
 }
 
 .request_block {
   flex: 1;
+  overflow: auto;
+  padding-top: 5px;
 }
 
 .schema_blocks {
@@ -80,49 +92,12 @@
   overflow: auto;
 }
 
-@media (max-width: 992px) {
-  .parent_wrapper {
-    width: 100% !important;
-    margin: 0 auto;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .request_block {
-    width: 100%;
-    height: auto;
-    padding: 0 16px;
-    margin-bottom: 24px;
-    flex: unset;
-  }
-
-  .schema_blocks {
-    margin-left: 0;
-    width: 100%;
-    height: auto;
-    padding: 0 16px;
-    margin-bottom: 24px;
-    flex: unset;
-  }
-
-  .api_token_wrapper {
-    flex-direction: column;
-    padding: 8px;
-  }
-  .api_token {
-    margin-bottom: 24px;
-  }
-  .page_title {
-    max-width: 480px;
-    padding: 0 16px;
-  }
-  .code_block {
-    overflow-x: scroll;
-  }
-}
-
-@media (max-width: 340px) {
-  .api_token_btn {
-    padding: 10px 8px !important;
-  }
+.textarea_label {
+  transform: translate(0.7rem, -0.8rem) scale(0.75);
+  background-color: #151717;
+  color: #ffffff;
+  position: absolute;
+  transform-origin: top left;
+  transition: all 0.25s ease;
+  padding: 8px;
 }
