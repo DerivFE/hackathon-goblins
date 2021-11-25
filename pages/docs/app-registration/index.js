@@ -7,6 +7,7 @@ import { Input } from "components/Input";
 import DocWrapper from "components/tabs/DocWrapper";
 import { Button } from "components/Button";
 import { Checkbox, CheckboxItem } from "components/Checkbox";
+import { Table } from "components/Table";
 import { styled } from "stitches.config";
 
 const inputFields = [
@@ -71,6 +72,7 @@ const AppRegistration = () => {
   });
 
   const [authToken, setAuthToken] = React.useState("");
+  const [tableData, setTableData] = React.useState([]);
 
   const itemsRef = React.useRef([]);
   const ws = React.useRef(null);
@@ -100,7 +102,16 @@ const AppRegistration = () => {
   const onSubmit = (data) => console.log(data);
 
   const handleMessage = (e) => {
-    console.log(e.data);
+    const response = JSON.parse(e.data);
+    if (response.error) {
+      alert(response.error.message);
+    } else {
+      if (response.authorize) {
+        ws.current.send(JSON.stringify({ app_list: 1 }));
+      } else if (response.app_list) {
+        setTableData(response.app_list);
+      }
+    }
   };
 
   return (
@@ -175,26 +186,7 @@ const AppRegistration = () => {
                 </div>
               </form>
             </div>
-            {/* <div class="table-wrapper">
-              <table
-                class="flex-table"
-                id="applications-table"
-                style="display: none"
-              >
-                <thead>
-                  <tr class="flex-tr">
-                    <th class="flex-tr-child name">Name</th>
-                    <th class="flex-tr-child app_id">Application ID</th>
-                    <th class="flex-tr-child scopes">Scopes</th>
-                    <th class="flex-tr-child redirect_url">Redirect URL</th>
-                    <th colspan="2" class="flex-tr-child actions">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div> */}
+            {tableData.length > 0 && <Table data={tableData} />}
             <div className={css.horizontal_separator}></div>
             <div className={css.request_json}>
               <h3>Request JSON</h3>

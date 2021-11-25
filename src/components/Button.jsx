@@ -63,6 +63,13 @@ export const Button = styled("button", {
         border: "solid 1px",
         padding: "6px 16px",
       },
+      table: {
+        backgroundColor: "rgb(239, 239, 239)",
+        padding: "8px",
+        fontSize: "14px",
+        fontWeight: 200,
+        margin: "2px",
+      },
     },
   },
   defaultVariants: {
