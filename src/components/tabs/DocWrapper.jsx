@@ -26,7 +26,7 @@ const DocWrapper = ({ children, value, ...props }) => {
     <StyledDiv
       css={{
         "@tabletL": {
-          width: "100%",
+          width: "calc(100% - 32px)",
           padding: "24px 16px",
           margin: "0 auto",
         },
