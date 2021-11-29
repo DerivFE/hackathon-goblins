@@ -18,14 +18,14 @@ const JsonSchemas = () => {
               Our API is defined by{" "}
               <Link
                 href="https://github.com/binary-com/websockets/tree/gh-pages/config"
-                target="_blank"
+                external
               >
                 JSON Schemas
               </Link>
               . Get updates by looking for &quot;JSON Schema Update&quot; in the{" "}
               <Link
                 href="https://github.com/binary-com/websockets/tree/gh-pages/config"
-                target="_blank"
+                external
               >
                 changelog
               </Link>
@@ -35,25 +35,22 @@ const JsonSchemas = () => {
               Useful tools:
             </Text>
             <Text as="p" type="paragraph1" css={{ mb: "16px" }}>
-              <Link href="http://jeremydorn.com/json-editor/" target="_blank">
+              <Link href="http://jeremydorn.com/json-editor/" external>
                 JSON Editor with JSON Schema support
               </Link>
             </Text>
             <Text as="p" type="paragraph1" css={{ mb: "16px" }}>
-              <Link
-                href="https://lbovet.github.io/typson-demo/"
-                target="_blank"
-              >
+              <Link href="https://lbovet.github.io/typson-demo/" external>
                 Generate JSON Schema from TypeScript
               </Link>
             </Text>
             <Text as="p" type="paragraph1" css={{ mb: "16px" }}>
-              <Link href="http://jsonschema.net/" target="_blank">
+              <Link href="http://jsonschema.net/" external>
                 Generate JSON Schema from JSON Object
               </Link>
             </Text>
             <Text as="p" type="paragraph1" css={{ mb: "16px" }}>
-              <Link href="http://www.jsonschemavalidator.net/" target="_blank">
+              <Link href="http://www.jsonschemavalidator.net/" external>
                 JSON Schema Validator
               </Link>
             </Text>

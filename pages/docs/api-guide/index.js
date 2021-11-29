@@ -43,16 +43,13 @@ const APIGuide = () => {
             </Text>
             <StyledOl>
               <StyledLi>
-                <Link href="https://deriv.com/" target="_blank">
+                <Link href="https://deriv.com/" external>
                   Open a Deriv account
                 </Link>{" "}
                 (either a demo or real account).
               </StyledLi>
               <StyledLi>
-                <Link
-                  href="https://app.deriv.com/account/api-token"
-                  target="_blank"
-                >
+                <Link href="https://app.deriv.com/account/api-token" external>
                   Create a new token
                 </Link>{" "}
                 using the <strong>admin</strong> scope.
@@ -61,7 +58,7 @@ const APIGuide = () => {
                 Register your app to obtain your
                 <Link
                   href="https://api.deriv.com/docs/app-registration/"
-                  target="_blank"
+                  external
                 >
                   <StyledCode>app_id</StyledCode>
                 </Link>{" "}
@@ -215,27 +212,27 @@ const APIGuide = () => {
             </Text>
             <p>
               You may get a client&apos;s{" "}
-              <Link href="/playground/#portfolio" target="_blank">
+              <Link href="/playground/#portfolio" external>
                 <StyledCode>portfolio</StyledCode>
               </Link>
               ,{" "}
-              <Link href="/playground/#statement" target="_blank">
+              <Link href="/playground/#statement" external>
                 <StyledCode>statement</StyledCode>
               </Link>
               ,{" "}
-              <Link href="/playground/#profit_table" target="_blank">
+              <Link href="/playground/#profit_table" external>
                 <StyledCode>profit_table</StyledCode>
               </Link>
               , and their account{" "}
-              <Link href="/playground/#balance" target="_blank">
+              <Link href="/playground/#balance" external>
                 <StyledCode>balance</StyledCode>
               </Link>
               . You may also sell an expired contract with{" "}
-              <Link href="/playground/#sell_expired" target="_blank">
+              <Link href="/playground/#sell_expired" external>
                 <StyledCode>sell_expired</StyledCode>
               </Link>
               , or generate a real time stream of{" "}
-              <Link href="/playground/#sell_expired" target="_blank">
+              <Link href="/playground/#sell_expired" external>
                 <StyledCode>transactions</StyledCode>
               </Link>
               .
@@ -247,14 +244,14 @@ const APIGuide = () => {
             <StyledUl>
               <StyledLi>
                 To price an option, call
-                <Link href="/playground/#proposal" target="_blank">
+                <Link href="/playground/#proposal" external>
                   <StyledCode>proposal</StyledCode>
                 </Link>
                 .
               </StyledLi>
               <StyledLi>
                 To price options that are open in a client&apos;s portfolio, use{" "}
-                <Link href="/playground/#paymentagent_transfer" target="_blank">
+                <Link href="/playground/#paymentagent_transfer" external>
                   <StyledCode>paymentagent_transfer</StyledCode>
                 </Link>
                 .
@@ -267,14 +264,14 @@ const APIGuide = () => {
             <StyledUl>
               <StyledLi>
                 Clients may withdraw via a payment agent using{" "}
-                <Link href="/playground/#paymentagent_withdraw" target="_blank">
+                <Link href="/playground/#paymentagent_withdraw" external>
                   <StyledCode>paymentagent_withdraw</StyledCode>
                 </Link>
                 .
               </StyledLi>
               <StyledLi>
                 Payment agents may credit clients’ accounts using
-                <Link href="/playground/#paymentagent_transfer" target="_blank">
+                <Link href="/playground/#paymentagent_transfer" external>
                   <StyledCode>paymentagent_transfer</StyledCode>
                 </Link>
                 .
@@ -287,21 +284,21 @@ const APIGuide = () => {
             <StyledUl>
               <StyledLi>
                 To keep the connection alive, use{" "}
-                <Link href="/playground/#paymentagent_withdraw" target="_blank">
+                <Link href="/playground/#paymentagent_withdraw" external>
                   <StyledCode>ping</StyledCode>
                 </Link>
                 .
               </StyledLi>
               <StyledLi>
                 Get the server time with{" "}
-                <Link href="/playground/#time" target="_blank">
+                <Link href="/playground/#time" external>
                   <StyledCode>time</StyledCode>
                 </Link>
                 .
               </StyledLi>
               <StyledLi>
                 Get the status of the website with{" "}
-                <Link href="/playground/#website_status" target="_blank">
+                <Link href="/playground/#website_status" external>
                   <StyledCode>website_status</StyledCode>
                 </Link>
                 .
@@ -313,11 +310,11 @@ const APIGuide = () => {
             </Text>
             <p>
               Some functions generate streams of data (e.g.{" "}
-              <Link href="/playground/#website_status" target="_blank">
+              <Link href="/playground/#website_status" external>
                 <StyledCode>ticks</StyledCode>
               </Link>
               ) while others don’t. Use{" "}
-              <Link href="/playground/#website_status" target="_blank">
+              <Link href="/playground/#website_status" external>
                 <StyledCode>forget</StyledCode>
               </Link>{" "}
               to cancel an outstanding stream.
