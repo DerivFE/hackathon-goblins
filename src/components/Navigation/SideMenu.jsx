@@ -21,12 +21,10 @@ const SideMenu = ({ is_shown, links }) => {
           return (
             <SideMenuItem
               key={link.name}
-              is_active={
-                link.url === current_path ||
-                link.sublinks?.includes(current_path)
-              }
+              is_active={link.url === current_path}
               name={link.name}
               sublinks={link.sublinks}
+              url={link.url}
             />
           );
         })}
@@ -35,31 +33,39 @@ const SideMenu = ({ is_shown, links }) => {
   );
 };
 
-const SideMenuItem = ({ is_active, name, sublinks }) => {
-  const [is_expanded, setExpanded] = useState(false);
+const SideMenuItem = ({ is_active, name, sublinks, url }) => {
+  const [is_expanded, setExpanded] = useState(!!sublinks);
+
+  if (!sublinks) {
+    return (
+      <Link href={url} passHref>
+        <div
+          className={classNames(`${css.wrapper}`, is_active ? css.active : "")}
+        >
+          <div className={css.main_item}>{name}</div>
+        </div>
+      </Link>
+    );
+  }
 
   return (
-    <div
-      onClick={() => setExpanded(!is_expanded)}
-      className={classNames(`${css.wrapper}`, is_active ? css.active : "")}
-    >
+    <div className={css.wrapper} onClick={() => setExpanded(!is_expanded)}>
       <div className={css.main_item}>
         {name}
-        {sublinks &&
-          (is_expanded ? (
-            <ArrowUpIcon className={css.expand_icon} />
-          ) : (
-            <ArrowDownIcon className={css.expand_icon} />
-          ))}
+        {is_expanded ? (
+          <ArrowUpIcon className={css.expand_icon} />
+        ) : (
+          <ArrowDownIcon className={css.expand_icon} />
+        )}
       </div>
-      {sublinks && (
-        <SideMenuDrawer is_expanded={is_expanded} sublinks={sublinks} />
-      )}
+      <SideMenuDrawer is_expanded={is_expanded} sublinks={sublinks} />
     </div>
   );
 };
 
 const SideMenuDrawer = ({ is_expanded, sublinks }) => {
+  const current_path = useRouter().pathname;
+
   return (
     <div
       className={classNames(
@@ -68,9 +74,17 @@ const SideMenuDrawer = ({ is_expanded, sublinks }) => {
       )}
     >
       {sublinks.map((sub) => {
+        const { url, name } = sub;
         return (
-          <Link key={sub.url} href={sub.url} passHref>
-            <a className={css.drawer_item}>{sub.name}</a>
+          <Link key={url} href={url} passHref>
+            <a
+              className={classNames(
+                css.drawer_item,
+                current_path === url ? css.active : ""
+              )}
+            >
+              {name}
+            </a>
           </Link>
         );
       })}
