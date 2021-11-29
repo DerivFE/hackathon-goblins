@@ -35,7 +35,7 @@ const BinarySocketBase = (() => {
   const isClose = () => !binary_socket || hasReadyState(2, 3);
 
   const close = () => {
-    binary_socket.close();
+    binary_socket?.close();
   };
 
   const openNewConnection = () => {
@@ -47,6 +47,15 @@ const BinarySocketBase = (() => {
     }
   };
 
+  const reopenConnection = () => {
+    close();
+    binary_socket = new WebSocket(getSocketUrl());
+    deriv_api = new DerivAPIBasic({
+      connection: binary_socket,
+    });
+    return deriv_api;
+  };
+
   return {
     get: () => {
       if (!is_initialized) {
@@ -55,6 +64,7 @@ const BinarySocketBase = (() => {
 
       return deriv_api;
     },
+    reopenConnection,
   };
 })();
 

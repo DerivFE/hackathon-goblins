@@ -248,6 +248,11 @@ const Playground = () => {
 }`);
   };
 
+  const resetConnection = () => {
+    setDerivApi(socket_base.reopenConnection());
+    setApiMessages([]);
+  };
+
   function getDefaultSelectedItem() {
     const name = router.asPath.slice(router.asPath.indexOf("#") + 1);
     return apiCalls.find((item) => item.name === name);
@@ -365,6 +370,7 @@ const Playground = () => {
                       border: "solid 2px #6e6e6e",
                     }}
                     variant="secondary"
+                    onClick={resetConnection}
                   >
                     Reset Connection
                   </Button>
