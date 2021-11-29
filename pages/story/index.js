@@ -9,7 +9,7 @@ import {
 import { Text } from "components/Text";
 import { Button } from "components/Button";
 import { Box } from "components/Box";
-import { Checkbox, CheckboxItem } from "components/Checkbox";
+import { CheckmarkGroup, CheckmarkItem } from "components/CheckmarkItem";
 import { Carousel, CarouselItem } from "components/Carousel";
 import { Input } from "../../src/components/Input";
 import { Codeblock } from "components/Codeblock/Codeblock";
@@ -137,20 +137,20 @@ const Story = () => {
           </div>
         </div>
         <div style={{ maxWidth: "690px" }}>
-          <Checkbox>
-            <CheckboxItem>
+          <CheckmarkGroup>
+            <CheckmarkItem>
               Register your app with Deriv, and add a percentage markup to the
               contract prices to profit from every contract payout.
-            </CheckboxItem>
-            <CheckboxItem>
+            </CheckmarkItem>
+            <CheckmarkItem>
               Register your app with Deriv, and add a percentage markup to the
               contract prices to profit from every contract payout.
-            </CheckboxItem>
-            <CheckboxItem>
+            </CheckmarkItem>
+            <CheckmarkItem>
               Register your app with Deriv, and add a percentage markup to the
               contract prices to profit from every contract payout.
-            </CheckboxItem>
-          </Checkbox>
+            </CheckmarkItem>
+          </CheckmarkGroup>
         </div>
         <Input
           label="this is a label"
