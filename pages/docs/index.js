@@ -153,7 +153,7 @@ const Docs = () => {
           </Text>
           <Text as="p" type="paragraph1" css={{ mb: "16px" }}>
             You can find all of the other available calls in the{" "}
-            <Link href="/api">API Playground</Link>.
+            <Link href="/playground">API Playground</Link>.
           </Text>
           <Text as="h2" type="heading4" css={{ color: "#333", mb: "8px" }}>
             Before you begin

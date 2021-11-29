@@ -138,7 +138,7 @@ const FAQ = () => {
                   <li>
                     If you are prepared to offer higher contract prices than
                     ours, you may add a <strong>markup percentage</strong> when
-                    you
+                    you{" "}
                     <Link
                       href="https://api.deriv.com/docs/app-registration"
                       external
