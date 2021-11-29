@@ -161,17 +161,14 @@ const Docs = () => {
           <StyledUl>
             <StyledLi>
               Open a{" "}
-              <Link
-                href="https://app.deriv.com/account/api-token"
-                target="_blank"
-              >
+              <Link href="https://app.deriv.com/account/api-token" external>
                 Deriv account
               </Link>{" "}
               (either a demo or real account).
             </StyledLi>
             <StyledLi>
               Create a new token using the{" "}
-              <Link href="https://deriv.com/" target="_blank">
+              <Link href="https://deriv.com/" external>
                 admin scope
               </Link>
               .
