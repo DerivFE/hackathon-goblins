@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "stitches.config";
 
 const StyledAutocomplete = styled("div", {
-  display: "block",
+  display: "flex",
   position: "relative",
   fontSize: "$fontSizes$3",
   flex: 1,
@@ -18,6 +18,7 @@ const StyledMenu = styled("div", {
   overflow: "auto",
   width: "100%",
   zIndex: "2",
+  top: "40px",
 });
 
 const StyledMenuItem = styled("div", {
@@ -259,7 +260,7 @@ const Autocomplete = ({
     const rect = node.getBoundingClientRect();
 
     setDropdownPosition({
-      maxHeight: window.innerHeight - rect.top - rect.height - 10,
+      maxHeight: window.innerHeight - rect.top - rect.height - 60,
       width: rect.width,
     });
   };
