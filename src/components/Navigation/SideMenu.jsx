@@ -39,26 +39,35 @@ const SideMenu = ({ is_shown, links }) => {
 const SideMenuItem = ({ is_active, name, sublinks, url }) => {
   const [is_expanded, setExpanded] = useState(false);
 
-  return (
-    <Link href={sublinks ? "" : url} passHref>
-      <div
-        onClick={() => setExpanded(!is_expanded)}
-        className={classNames(`${css.wrapper}`, is_active ? css.active : "")}
-      >
-        <div className={css.main_item}>
-          {name}
-          {sublinks &&
-            (is_expanded ? (
-              <ArrowUpIcon className={css.expand_icon} />
-            ) : (
-              <ArrowDownIcon className={css.expand_icon} />
-            ))}
+  if (!sublinks) {
+    return (
+      <Link href={url} passHref>
+        <div
+          className={classNames(`${css.wrapper}`, is_active ? css.active : "")}
+        >
+          <div className={css.main_item}>{name}</div>
         </div>
-        {sublinks && (
-          <SideMenuDrawer is_expanded={is_expanded} sublinks={sublinks} />
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      onClick={() => setExpanded(!is_expanded)}
+      className={classNames(`${css.wrapper}`)}
+    >
+      <div
+        className={classNames(`${css.main_item}`, is_active ? css.active : "")}
+      >
+        {name}
+        {is_expanded ? (
+          <ArrowUpIcon className={css.expand_icon} />
+        ) : (
+          <ArrowDownIcon className={css.expand_icon} />
         )}
       </div>
-    </Link>
+      <SideMenuDrawer is_expanded={is_expanded} sublinks={sublinks} />
+    </div>
   );
 };
 
