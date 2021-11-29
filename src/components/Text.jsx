@@ -77,6 +77,9 @@ export const Text = styled(DEFAULT_TAG, {
       textLight: {
         color: "$textLight",
       },
+      white: {
+        color: "$white",
+      },
     },
   },
   defaultVariants: {

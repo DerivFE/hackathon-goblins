@@ -240,8 +240,11 @@ const Home = () => {
               </div>
             </div>
             <Text as="p" type="paragraph1" className={css.steps_small_desc}>
-              By using our API, you confirm that you have read and agreed to our
-              <Link href="/tnc/business-partners-api-user.pdf">
+              By using our API, you confirm that you have read and agreed to our{" "}
+              <Link
+                external
+                href="https://deriv.com/tnc/business-partners-api-user.pdf"
+              >
                 terms and conditions
               </Link>
               .
@@ -314,9 +317,13 @@ const Home = () => {
             Simplify your development processes and get your app up and running
             faster with our all-in-one client library
           </Text>
-          <Button>
-            <Text type="paragraph2">Take me to the library</Text>
-          </Button>
+          <Link
+            external
+            unstyled
+            href="https://github.com/binary-com/deriv-api"
+          >
+            <Button>Take me to the library</Button>
+          </Link>
         </div>
         <div className={classNames(css.community, css.fold)}>
           <div className={css.inner_container}>
@@ -334,11 +341,17 @@ const Home = () => {
               >
                 Discuss ideas and share solutions with developers worldwide.
               </Text>
-              <Button variant="outlined2" className={css.community_join_btn}>
-                <Text css={{ color: "$white", fontSize: "14px" }}>
-                  Join our community
-                </Text>
-              </Button>
+              <Link
+                external
+                unstyled
+                href="https://binary.vanillacommunity.com/"
+              >
+                <Button variant="outlined2" className={css.community_join_btn}>
+                  <Text type="paragraph2" color="white">
+                    Join our community
+                  </Text>
+                </Button>
+              </Link>
             </div>
             <div className={css.section}>
               <Text
