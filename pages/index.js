@@ -3,7 +3,7 @@ import { Link } from "components/Link/Link";
 import { Button } from "components/Button";
 import Image from "next/image";
 import { Carousel, CarouselItem } from "components/Carousel";
-import { Checkbox, CheckboxItem } from "components/Checkbox";
+import { CheckmarkGroup, CheckmarkItem } from "components/CheckmarkItem";
 import { Text } from "components/Text";
 import HeroImage from "components/Navigation/HeroImage";
 import Layout from "components/Layout/Layout";
@@ -164,21 +164,21 @@ const Home = () => {
               </Text>
             </div>
             <div className={css.check_container}>
-              <Checkbox>
-                <CheckboxItem className={css.check_container_item}>
+              <CheckmarkGroup>
+                <CheckmarkItem className={css.check_container_item}>
                   Register your app with Deriv, and add a percentage markup to
                   the contract prices to profit from every contract payout.
-                </CheckboxItem>
-                <CheckboxItem className={css.check_container_item}>
+                </CheckmarkItem>
+                <CheckmarkItem className={css.check_container_item}>
                   Sign up as an affiliate, build your app, and get commission on
                   every signup and trade completed via your app.
-                </CheckboxItem>
-                <CheckboxItem className={css.check_container_item}>
+                </CheckmarkItem>
+                <CheckmarkItem className={css.check_container_item}>
                   Sign up as a payment agent , and use our API to build your own
                   custom payment website to earn commission on every payment you
                   process for Deriv’s clients.
-                </CheckboxItem>
-              </Checkbox>
+                </CheckmarkItem>
+              </CheckmarkGroup>
             </div>
           </div>
         </div>
